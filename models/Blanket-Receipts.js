@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 const blanketPOSchema = new Schema({
@@ -15,7 +16,7 @@ const blanketPOSchema = new Schema({
   transactionDate: Date,
   needByDate: Date,
   promiseDate: Date,
-  releaseNum: Number
+  releaseNum: Number,
 });
 
 mongoose.model('blanket-receipts', blanketPOSchema);
