@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ext .js",
+    "lint-fix": "eslint --fix . --ext .js",
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
@@ -23,7 +25,7 @@
     "concurrently": "^5.0.2",
     "express": "^4.17.1",
     "mongoose": "^5.8.4",
-    "nodemon": "^6.12.1"
+    "nodemon": "^2.0.2"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
