@@ -19,4 +19,4 @@ const blanketPOSchema = new Schema({
   releaseNum: Number,
 });
 
-mongoose.model('blanket-receipts', blanketPOSchema);
+module.exports = mongoose.model('blanket-receipts', blanketPOSchema);

@@ -23,8 +23,10 @@
   "homepage": "https://github.com/herwaldt/SupplierPortal#readme",
   "dependencies": {
     "concurrently": "^5.0.2",
+    "csvtojson": "^2.0.10",
     "express": "^4.17.1",
     "mongoose": "^5.8.4",
+    "multer": "^1.4.2",
     "nodemon": "^2.0.2"
   },
   "devDependencies": {
