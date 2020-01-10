@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './Header';
-const Landing = () => <h2>Landing</h2>
+import Footer from './Footer';
+import Landing from './Landing';
 const SignUp = () => <h2>Sign Up Here</h2>
 const Scorecard = () => <h2>Scorecard</h2>
 const OTD = () => <h2>On Time Delivery</h2>
@@ -21,6 +22,7 @@ const App = () => {
           <Route exact path="/scorecard/DPPM" component={DPPM} />
           <Route exact path="/scorecard/spend" component={Spend} />
           <Route exact path="/signup" component={SignUp} />
+          <Footer />
         </div>
       </BrowserRouter>
     </>

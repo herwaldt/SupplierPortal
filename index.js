@@ -95,8 +95,8 @@ app.post('/api/late', upload.single('statement'), (req, res) => {
 });
 
 app.post('/api/later', (req, res) => {
-  const filter = { transactionId: '1001' };
-  const update = { $set: { late: 'Y', daysLate: 12 } };
+  const filter = { transactionId: '1000' };
+  const update = { $set: { late: 'N', daysLate: 12 } };
   console.log(req);
   receipts.collection.updateOne(filter, update, { multi: true })
     .then(res.end('inserted!'));
