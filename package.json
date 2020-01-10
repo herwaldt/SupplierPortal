@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,8 @@
   },
   "homepage": "https://github.com/herwaldt/SupplierPortal#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "concurrently": "^5.0.2",
+    "express": "^4.17.1",
+    "nodemon": "^6.12.1"
   }
 }
