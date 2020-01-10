@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 const standardPOSchema = new Schema({
@@ -14,7 +15,7 @@ const standardPOSchema = new Schema({
   qtyTransacted: Number,
   transactionDate: Date,
   needByDate: Date,
-  promiseDate: Date
+  promiseDate: Date,
 });
 
 mongoose.model('standard-receipts', standardPOSchema);
