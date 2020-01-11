@@ -53,8 +53,7 @@ app.post('/api/lates', upload.single('statement'), (req, res) => {
         .fromFile(req.file.path)
         .then((csvData) => {
           let countLatesAdded = 0;
-          // eslint-disable-next-line no-unused-vars
-          const updateLates = csvData.map((obj) => {
+          csvData.map((obj) => {
             // eslint-disable-next-line no-plusplus
             ++countLatesAdded;
             const filter = { transactionId: obj.transactionId };
