@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const ReceiptSchema = new Schema({
   late: String,
-  daysLate: String,
+  daysLate: Number,
   transactionId: Number,
   poNumber: String,
   lineNumber: Number,
