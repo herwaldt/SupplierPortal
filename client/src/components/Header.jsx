@@ -14,11 +14,11 @@ const Header = () => {
   const classes = useStyles();
   return (
     <>
-        <AppBar className={classes.AppBar}>
-          <Toolbar>
-            <Typography variant="h5">X-Rite Supplier Portal</Typography>
-          </Toolbar>
-        </AppBar>
+      <AppBar className={classes.AppBar}>
+        <Toolbar>
+          <Typography variant="h5">X-Rite Supplier Portal</Typography>
+        </Toolbar>
+      </AppBar>
       <Toolbar />
     </>
   );
