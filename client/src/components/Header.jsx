@@ -2,6 +2,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/styles';
+import { Link } from '@material-ui/core';
 
 const useStyles = makeStyles({
   AppBar: {
@@ -13,13 +14,14 @@ const useStyles = makeStyles({
   },
 });
 
+
 const Header = () => {
   const classes = useStyles();
   return (
     <>
         <AppBar className={classes.AppBar}>
           <Toolbar>
-            <img className={classes.imageProp} src="xritelogo-white.png" alt="xrite-logo" />
+            <img  className={classes.imageProp} src="xritelogo-white.png" alt="xrite-logo" />
           </Toolbar>
         </AppBar>
       <Toolbar />
