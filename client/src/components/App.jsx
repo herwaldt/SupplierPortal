@@ -4,8 +4,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Header';
 import Landing from './Landing';
 import SignUp from './SignUp';
+import Scorecard from './Scorecard';
 
-const Scorecard = () => <h2>Scorecard</h2>
 const OTD = () => <h2>On Time Delivery</h2>
 const DPPM = () => <h2>Deffective Parts Per Million</h2>
 const Spend = () => <h2>Spend</h2>

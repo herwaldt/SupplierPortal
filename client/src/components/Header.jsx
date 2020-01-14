@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/styles';
-import { Link } from '@material-ui/core';
+import { Link, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles({
   AppBar: {
@@ -11,6 +11,11 @@ const useStyles = makeStyles({
   },
   imageProp: {
     height: '90%',
+    backgroundImage: `url(${Image})`,
+  },
+  grid: {
+    height: 100,
+    alignItems: 'center',
   },
 });
 
@@ -21,7 +26,11 @@ const Header = () => {
     <>
         <AppBar className={classes.AppBar}>
           <Toolbar>
-            <img  className={classes.imageProp} src="xritelogo-white.png" alt="xrite-logo" />
+            <Link href="/">
+              <Grid container className={classes.grid} >
+                <img  className={classes.imageProp} src="xritelogo-white.png" alt="xrite-logo" />
+              </Grid>
+            </Link>
           </Toolbar>
         </AppBar>
       <Toolbar />

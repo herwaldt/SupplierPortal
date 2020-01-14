@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 
 
-import Image from '../images/xriteWebsiteBanner.jpg'
+import Image from '../images/xriteWebsiteBanner.jpg';
 import SignIn from './SignIn';
 
 const useStyles = makeStyles({
