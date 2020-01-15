@@ -3,8 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './Header';
 import Landing from './Landing';
-import SignUp from './SignUp';
+import SignUp from './LoginComponents/SignUp';
 import Scorecard from './Scorecard';
+import ForgotPassword from './LoginComponents/ForgotPassword';
 
 const OTD = () => <h2>On Time Delivery</h2>
 const DPPM = () => <h2>Deffective Parts Per Million</h2>
@@ -21,7 +22,8 @@ const App = () => {
           <Route exact path="/scorecard/OTD" component={OTD} />
           <Route exact path="/scorecard/DPPM" component={DPPM} />
           <Route exact path="/scorecard/spend" component={Spend} />
-          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/account/signup" component={SignUp} />
+          <Route exact path="/account/password" component={ForgotPassword} />
         </div>
       </BrowserRouter>
     </>

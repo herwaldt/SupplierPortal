@@ -1,8 +1,8 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/styles';
-import { Link, Grid } from '@material-ui/core';
+import { Link, Grid, AppBar, Toolbar } from '@material-ui/core';
+
+import Logo from '../images/xritelogo-white.png';
 
 const useStyles = makeStyles({
   AppBar: {
@@ -28,7 +28,7 @@ const Header = () => {
           <Toolbar>
             <Link href="/">
               <Grid container className={classes.grid} >
-                <img  className={classes.imageProp} src="xritelogo-white.png" alt="xrite-logo" />
+                <img  className={classes.imageProp} src={Logo} alt="xrite-logo" />
               </Grid>
             </Link>
           </Toolbar>

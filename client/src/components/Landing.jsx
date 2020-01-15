@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import Grid from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 
 
 import Image from '../images/xriteWebsiteBanner.jpg';
-import SignIn from './SignIn';
+import SignIn from './LoginComponents/SignIn';
 
 const useStyles = makeStyles({
   backgroundImg: {
