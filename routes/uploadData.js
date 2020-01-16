@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const multer = require('multer');
 
 const upload = multer({ dest: 'uploads/' });
@@ -12,13 +13,22 @@ module.exports = (app) => {
         csvtojson()
           .fromFile(req.file.path)
           .then((csvData) => {
+            csvData.forEach((obj) => {
+              if (obj.transactionDate) {
+                obj.transactionDate = new Date(obj.transactionDate);
+              }
+              if (obj.needByDate) {
+                obj.needByDate = new Date(obj.needByDate);
+              }
+              if (obj.promiseDate) {
+                obj.promiseDate = new Date(obj.promiseDate);
+              }
+            });
             receipts.collection.insertMany(csvData, (error, result) => {
               if (error) {
                 res.error('There was an error when inserting the data to Mongodb.');
-                receipts.close();
               } else {
                 res.end(`Inserted ${result.insertedCount} records.`);
-                receipts.close();
               }
             });
           });
