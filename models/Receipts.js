@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const standardPOSchema = new Schema({
+const ReceiptSchema = new Schema({
+  late: String,
+  daysLate: Number,
+  transactionId: Number,
   poNumber: String,
   lineNumber: Number,
   vendorName: String,
@@ -16,6 +19,10 @@ const standardPOSchema = new Schema({
   transactionDate: Date,
   needByDate: Date,
   promiseDate: Date,
+  releaseNum: Number,
+  internalOrExternal: String,
+  reasonCode: String,
+  comments: String,
 });
 
-mongoose.model('standard-receipts', standardPOSchema);
+module.exports = mongoose.model('receipts', ReceiptSchema);
