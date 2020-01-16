@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const multer = require('multer');
 
 const upload = multer({ dest: 'uploads/' });
@@ -7,23 +8,27 @@ const receipts = require('../models/Receipts');
 
 module.exports = (app) => {
   app.post('/api/upload/receipt', upload.single('statement'), (req, res) => {
-    console.log(`new upload = ${req.file.filename}\n`);
-    console.log(req.file);
-
     fs.exists(req.file.path, (exists) => {
       if (exists) {
         csvtojson()
           .fromFile(req.file.path)
           .then((csvData) => {
-            console.log(csvData);
+            csvData.forEach((obj) => {
+              if (obj.transactionDate) {
+                obj.transactionDate = new Date(obj.transactionDate);
+              }
+              if (obj.needByDate) {
+                obj.needByDate = new Date(obj.needByDate);
+              }
+              if (obj.promiseDate) {
+                obj.promiseDate = new Date(obj.promiseDate);
+              }
+            });
             receipts.collection.insertMany(csvData, (error, result) => {
               if (error) {
                 res.error('There was an error when inserting the data to Mongodb.');
-                receipts.close();
               } else {
-                console.log(result);
                 res.end(`Inserted ${result.insertedCount} records.`);
-                receipts.close();
               }
             });
           });
@@ -34,9 +39,6 @@ module.exports = (app) => {
   });
 
   app.post('/api/upload/lates', upload.single('statement'), (req, res) => {
-    console.log(`new upload = ${req.file.filename}\n`);
-    console.log(req.file);
-
     fs.exists(req.file.path, (exists) => {
       if (exists) {
         csvtojson()
