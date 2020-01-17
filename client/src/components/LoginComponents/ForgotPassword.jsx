@@ -1,7 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Card, Grid, Avatar, CssBaseline, TextField, Link, Box, Typography, Container } from '@material-ui/core';
+import {
+  Button, Card, Grid, Avatar, CssBaseline, TextField, Link, Box, Typography, Container,
+} from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -9,14 +12,15 @@ function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         X-Rite, Incorporated. All rights reserved.
-      </Link>{' '}
+      </Link>
+      {' '}
       {new Date().getFullYear()}
-      {'.'}
+      .
     </Typography>
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(4),
     display: 'flex',
@@ -38,12 +42,12 @@ const useStyles = makeStyles(theme => ({
   footer: {
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(3),
-  },  
+  },
   main: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    minHeight: '93vh'
+    minHeight: '93vh',
   },
   card: {
     minWidth: 500,
@@ -63,18 +67,18 @@ export default function SignIn() {
 
   return (
     <Grid className={classes.grid}>
-        <Card className={classes.card}>
+      <Card className={classes.card}>
         <Container component="main" maxWidth="xs" className={classes.paper}>
-            <CssBaseline />
-            <div className={classes.paper} alignItems="center">
+          <CssBaseline />
+          <div className={classes.paper} alignItems="center">
             <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
+              <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-                Reset Password.
+                  Reset Password.
             </Typography>
             <form className={classes.form} noValidate>
-                <TextField
+              <TextField
                 variant="outlined"
                 margin="normal"
                 required
@@ -84,30 +88,30 @@ export default function SignIn() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                />
-                <Button
+              />
+              <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                >
+              >
                 Send Reset Email
-                </Button>
-                <Grid container>
+              </Button>
+              <Grid container>
                 <Grid item>
-                    <Link href="/account/signup" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                    </Link>
+                  <Link href="/account/signup" variant="body2">
+                    Don't have an account? Sign Up
+                  </Link>
                 </Grid>
-                </Grid>
+              </Grid>
             </form>
-            </div>
-            <Box className={classes.footer}>
+          </div>
+          <Box className={classes.footer}>
             <Copyright />
-            </Box>
+          </Box>
         </Container>
-        </Card>
+      </Card>
     </Grid>
   );
 }

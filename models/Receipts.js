@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const ReceiptSchema = new Schema({
   late: String,
-  daysLate: String,
+  daysLate: Number,
   transactionId: Number,
   poNumber: String,
   lineNumber: Number,
@@ -25,4 +25,4 @@ const ReceiptSchema = new Schema({
   comments: String,
 });
 
-module.exports = mongoose.model('rtests', ReceiptSchema);
+module.exports = mongoose.model('receipts', ReceiptSchema);

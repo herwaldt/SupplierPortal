@@ -1,6 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles'
-import { Typography, Button, CardContent, CardActions, Card, Paper, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import {
+  Typography, Button, CardContent, CardActions, Card, Paper, Grid,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
   },
   button: {
-    padding: theme.spacing(1,4),
+    padding: theme.spacing(1, 4),
     width: '25vh',
   },
 }));
@@ -37,35 +39,35 @@ export default function OverviewCard() {
 
   return (
     <Paper elevation={4} className={classes.paper}>
-        <Card className={classes.card}>
-            <Grid container direction="column" className={classes.grid}>
-                <CardContent>
-                    <Grid item container className={classes.grid} spacing={2}>
-                        <Grid item direction="column" className={classes.grid}>
-                            <Typography variant="h4" component="h2">
-                            On-Time Delivery
-                            </Typography>
-                            <Typography variant="h5" component="h2">
-                            (OTD)
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="body1" component="p">
-                                This is a measure of late deliveries.
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid item className={classes.grid}>
-                        <Typography variant="h2" className={classes.metric}>
-                            98%
-                        </Typography>
-                    </Grid>
-                </CardContent>
-                <CardActions>
-                    <Button size="large" className={classes.button} variant="contained" color="primary">View Data</Button>
-                </CardActions>
+      <Card className={classes.card}>
+        <Grid container direction="column" className={classes.grid}>
+          <CardContent>
+            <Grid item container className={classes.grid} spacing={2}>
+              <Grid item direction="column" className={classes.grid}>
+                <Typography variant="h4" component="h2">
+                    On-Time Delivery
+                </Typography>
+                <Typography variant="h5" component="h2">
+                    (OTD)
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body1" component="p">
+                  This is a measure of late deliveries.
+                </Typography>
+              </Grid>
             </Grid>
-        </Card>
+            <Grid item className={classes.grid}>
+              <Typography variant="h2" className={classes.metric}>
+                98%
+              </Typography>
+            </Grid>
+          </CardContent>
+          <CardActions>
+            <Button size="large" className={classes.button} variant="contained" color="primary">View Data</Button>
+          </CardActions>
+        </Grid>
+      </Card>
     </Paper>
   );
 }

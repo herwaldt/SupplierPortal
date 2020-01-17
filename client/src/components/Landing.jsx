@@ -9,8 +9,8 @@ import SignIn from './LoginComponents/SignIn';
 const useStyles = makeStyles({
   backgroundImg: {
 
-    overflow: "hidden",
-    height: "100%",
+    overflow: 'hidden',
+    height: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -33,12 +33,12 @@ const useStyles = makeStyles({
 
 const Header = () => {
   const classes = useStyles();
+
   return (
     <>
       <Grid className={classes.grid}>
-          <SignIn />
+        <SignIn />
       </Grid>
-
     </>
   );
 };

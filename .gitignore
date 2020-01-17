@@ -1,4 +1,5 @@
 node_modules/
+uploads/
 
 # Secret keys
 /config/keys.js

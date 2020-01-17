@@ -1,6 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles'
-import { Typography, CardContent, Card, Paper, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import {
+  Typography, CardContent, Card, Paper, Grid,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -31,27 +33,27 @@ export default function TotalScore() {
 
   return (
     <Paper elevation={0} className={classes.paper}>
-        <Card elevation={0} className={classes.card}>
-            <Grid container direction="column" className={classes.grid}>
-                <CardContent>
-                    <Grid item container spacing={2} className={classes.grid}>
-                        <Grid item direction="column" className={classes.grid}>
-                            <Typography variant="h4" component="h2">
-                            Total Score:
-                            </Typography>
-                            <Typography variant="body1" component="p">
-                                Based on performance for the metrics below.
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid item className={classes.grid}>
-                        <Typography variant="h1" className={classes.metric}>
-                            B
-                        </Typography>
-                    </Grid>
-                </CardContent>
+      <Card elevation={0} className={classes.card}>
+        <Grid container direction="column" className={classes.grid}>
+          <CardContent>
+            <Grid item container spacing={2} className={classes.grid}>
+              <Grid item direction="column" className={classes.grid}>
+                <Typography variant="h4" component="h2">
+                Total Score:
+                </Typography>
+                <Typography variant="body1" component="p">
+                  Based on performance for the metrics below.
+                </Typography>
+              </Grid>
             </Grid>
-        </Card>
+            <Grid item className={classes.grid}>
+              <Typography variant="h1" className={classes.metric}>
+                B
+              </Typography>
+            </Grid>
+          </CardContent>
+        </Grid>
+      </Card>
     </Paper>
   );
 }
