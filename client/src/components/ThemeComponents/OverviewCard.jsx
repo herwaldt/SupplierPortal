@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   metric: {
-    paddingTop: theme.spacing(3),
+    paddingTop: theme.spacing(2),
   },
   button: {
     padding: theme.spacing(1,4),

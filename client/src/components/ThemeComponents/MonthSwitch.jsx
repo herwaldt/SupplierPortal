@@ -31,6 +31,15 @@ const useStyles = makeStyles((theme) => ({
   buttonGroup: {
     minWidth: 300,
   },
+  gridColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justify: 'center',
+    minWidth: '100vh',
+    marginTop: theme.spacing(5),
+    margin: 'auto',
+  },
 }));
 
 export default function MonthSwitch() {
@@ -59,14 +68,16 @@ export default function MonthSwitch() {
     ];
 
   return (
-    <Paper elevation={0} className={classes.paper}>
-        <Card elevation={0} className={classes.card}>
-            <Grid container direction="column" className={classes.grid}>
-                <ToggleButtonGroup exclusive color="primary" value={dateRange} onChange={handleChange} className={classes.buttonGroup}>
-                    {children}
-                </ToggleButtonGroup >
-            </Grid>
-        </Card>
-    </Paper>
+    <Grid container className={classes.gridColumn}>
+      <Paper elevation={0} className={classes.paper}>
+          <Card elevation={0} className={classes.card}>
+              <Grid container direction="column" className={classes.grid}>
+                  <ToggleButtonGroup exclusive color="primary" value={dateRange} onChange={handleChange} className={classes.buttonGroup}>
+                      {children}
+                  </ToggleButtonGroup >
+              </Grid>
+          </Card>
+      </Paper>
+    </Grid>
   );
 }
