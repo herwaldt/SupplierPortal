@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 }));
 
 const data = {
@@ -47,32 +47,32 @@ const data = {
       hoverBackgroundColor: 'rgb(255,175,0)',
       hoverBorderColor: 'rgb(245,245,245)',
       data: [65, 59, 80, 81, 56, 55, 40],
-    }
-  ]
+    },
+  ],
 };
 
 const options = {
   maintainAspectRatio: false,
-  legend:{
-    display: false
+  legend: {
+    display: false,
   },
   responsive: true,
   tooltips: {
-    mode: 'label'
+    mode: 'label',
   },
   elements: {
     line: {
-      fill: false
-    }
+      fill: false,
+    },
   },
   scales: {
     xAxes: [
       {
         display: true,
         gridLines: {
-          display: false
-        }
-      }
+          display: false,
+        },
+      },
     ],
     yAxes: [
       {
@@ -85,11 +85,11 @@ const options = {
         display: true,
         position: 'left',
         labels: {
-          show: true
-        }
+          show: true,
+        },
       },
-    ]
-  }
+    ],
+  },
 };
 
 export default function BarChart() {
@@ -97,21 +97,21 @@ export default function BarChart() {
 
   return (
     <Grid container direction="column" className={classes.grid}>
-        <Paper elevation={2} className={classes.paper}>
-            <Card className={classes.card}>
-              <Grid className={classes.gridColumn}>
-                <Typography variant="h4" component="h2">
-                  On-Time Delivery (OTD)
-                </Typography>
-                <Bar
-                data={data}
-                options={options}
-                height={300}
-                className={classes.barchart}
-                />
-              </Grid>
-            </Card>
-        </Paper>
+      <Paper elevation={2} className={classes.paper}>
+        <Card className={classes.card}>
+          <Grid className={classes.gridColumn}>
+            <Typography variant="h4" component="h2">
+              On-Time Delivery (OTD)
+            </Typography>
+            <Bar
+              data={data}
+              options={options}
+              height={300}
+              className={classes.barchart}
+            />
+          </Grid>
+        </Card>
+      </Paper>
     </Grid>
   );
 }
