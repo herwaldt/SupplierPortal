@@ -1,9 +1,11 @@
 import React from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Grid, Avatar, CssBaseline, TextField, Link, Typography, Container } from '@material-ui/core';
+import {
+  Button, Grid, Avatar, CssBaseline, TextField, Link, Typography, Container,
+} from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(16),
     display: 'flex',

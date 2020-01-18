@@ -1,7 +1,10 @@
 import React from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Card, Grid, Avatar, CssBaseline, TextField, Link, Box, Typography, Container, FormControlLabel, Checkbox } from '@material-ui/core';
+import {
+  Button, Card, Grid, Avatar, CssBaseline, TextField,
+  Link, Box, Typography, Container, FormControlLabel, Checkbox,
+} from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -9,14 +12,15 @@ function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         X-Rite, Incorporated. All rights reserved.
-      </Link>{' '}
+      </Link>
+      {' '}
       {new Date().getFullYear()}
-      {'.'}
+      .
     </Typography>
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(4),
     display: 'flex',
@@ -38,12 +42,12 @@ const useStyles = makeStyles(theme => ({
   footer: {
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(3),
-  },  
+  },
   main: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    minHeight: '93vh'
+    minHeight: '93vh',
   },
   card: {
     minWidth: 500,
@@ -59,7 +63,7 @@ export default function SignIn() {
     <Card className={classes.card}>
       <Container component="main" maxWidth="xs" className={classes.paper}>
         <CssBaseline />
-        <div className={classes.paper} alignItems="center">
+        <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -110,7 +114,7 @@ export default function SignIn() {
               </Grid>
               <Grid item>
                 <Link href="/account/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>

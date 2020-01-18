@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 
 require('./models/Receipts');
+require('./models/Quality');
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true }, { useUnifiedTopology: true });
 
@@ -14,5 +15,6 @@ app.get('/', (req, res) => {
 
 require('./routes/uploadData')(app);
 require('./routes/receiptData')(app);
+require('./routes/qualityData')(app);
 
 app.listen(5001);
