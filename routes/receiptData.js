@@ -43,7 +43,7 @@ module.exports = (app) => {
           qtyTransacted: {
             $sum: '$qtyTransacted',
           },
-          totalReceipts: {
+          receipts: {
             $sum: 1,
           },
         },
@@ -51,7 +51,7 @@ module.exports = (app) => {
     ])
       .exec()
       .then((result) => {
-        res.json(result);
+        res.json(result[0]);
       })
       .catch((err) => {
         res.status(500).json({ error: err });
@@ -85,7 +85,7 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: title,
+            // DateRange: title,
             year: '$year',
             month: '$month',
           },
@@ -170,7 +170,7 @@ module.exports = (app) => {
       {
         $group: {
           _id: title,
-          totalLateReceipts: {
+          lateReceipts: {
             $sum: 1,
           },
         },
@@ -178,7 +178,7 @@ module.exports = (app) => {
     ])
       .exec()
       .then((result) => {
-        res.json(result);
+        res.json(result[0]);
       })
       .catch((err) => {
         res.status(500).json({ error: err });
@@ -213,7 +213,7 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: title,
+            // DateRange: title,
             year: '$year',
             month: '$month',
           },

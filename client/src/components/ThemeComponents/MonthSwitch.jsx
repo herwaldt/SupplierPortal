@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MonthSwitch() {
   const classes = useStyles();
-  const [dateRange, setDateRange] = React.useState('3month');
+  const [dateRange, setDateRange] = React.useState('3Month');
 
   const handleChange = (event, newDateRange) => {
     if (newDateRange !== dateRange) {
@@ -53,17 +53,14 @@ export default function MonthSwitch() {
   };
 
   const children = [
-    <ToggleButton key={1} value="3month">
+    <ToggleButton key={1} value="3Month">
         Last 3 months
     </ToggleButton>,
-    <ToggleButton key={2} value="6month">
+    <ToggleButton key={2} value="6Month">
         Last 6 Months
     </ToggleButton>,
-    <ToggleButton key={3} value="12month">
+    <ToggleButton key={3} value="12Month">
         Last 12 Months
-    </ToggleButton>,
-    <ToggleButton key={4} value="full">
-        Full History
     </ToggleButton>,
   ];
 

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import receiptReducer from './receiptReducer';
+import overviewReducer from './overviewReducer';
+import deliveryReducer from './deliveryReducer';
 
 export default combineReducers({
-  receipts: receiptReducer,
+  overview: overviewReducer,
+  delivery: deliveryReducer,
 });

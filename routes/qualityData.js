@@ -30,7 +30,7 @@ module.exports = (app) => {
       {
         $group: {
           _id: title,
-          qtyDefectivebyMonth: {
+          qtyDefective: {
             $sum: '$Qty_Defective',
           },
         },
@@ -38,7 +38,7 @@ module.exports = (app) => {
     ])
       .exec()
       .then((result) => {
-        res.json(result);
+        res.json(result[0]);
       })
       .catch((err) => {
         res.status(500).json({ error: err });

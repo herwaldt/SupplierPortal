@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    align: "center"
   },
   metric: {
     paddingTop: theme.spacing(3),
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function OverviewCard() {
+export default function OverviewCard({ title, subtitle, desc, calc }) {
   const classes = useStyles();
 
   return (
@@ -43,23 +44,23 @@ export default function OverviewCard() {
         <Grid container direction="column" className={classes.grid}>
           <CardContent>
             <Grid item container className={classes.grid} spacing={2}>
-              <Grid item direction="column" className={classes.grid}>
-                <Typography variant="h4" component="h2">
-                    On-Time Delivery
+              <Grid item container direction="column" className={classes.grid}>
+                <Typography variant="h4" component="h2" align="center">
+                    {title}
                 </Typography>
-                <Typography variant="h5" component="h2">
-                    (OTD)
+                <Typography variant="h5" component="h2" align="center">
+                    {subtitle}
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography variant="body1" component="p">
-                  This is a measure of late deliveries.
+                  {desc}
                 </Typography>
               </Grid>
             </Grid>
             <Grid item className={classes.grid}>
               <Typography variant="h2" className={classes.metric}>
-                98%
+                {calc}
               </Typography>
             </Grid>
           </CardContent>

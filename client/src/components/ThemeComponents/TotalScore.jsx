@@ -37,7 +37,7 @@ export default function TotalScore() {
         <Grid container direction="column" className={classes.grid}>
           <CardContent>
             <Grid item container spacing={2} className={classes.grid}>
-              <Grid item direction="column" className={classes.grid}>
+              <Grid item container direction="column" className={classes.grid}>
                 <Typography variant="h4" component="h2">
                 Total Score:
                 </Typography>
