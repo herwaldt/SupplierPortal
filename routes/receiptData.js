@@ -20,6 +20,8 @@ module.exports = (app) => {
     const lastMonth = new Date();
     const firstMonth = new Date();
 
+    lastMonth.setDate(1);
+    firstMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     firstMonth.setMonth(firstMonth.getMonth() - months);
     Receipts.aggregate([
@@ -64,6 +66,8 @@ module.exports = (app) => {
     const lastMonth = new Date();
     const firstMonth = new Date();
 
+    lastMonth.setDate(1);
+    firstMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     firstMonth.setMonth(firstMonth.getMonth() - months);
     Receipts.aggregate([
@@ -80,14 +84,19 @@ module.exports = (app) => {
           _id: 0,
           month: { $month: '$transactionDate' },
           year: { $year: '$transactionDate' },
+          internalOrExternal: '$internalOrExternal',
         },
       },
       {
         $group: {
           _id: {
-            // DateRange: title,
+          $dateFromParts: {
             year: '$year',
             month: '$month',
+          }
+            // DateRange: title,
+            // year: '$year',
+            // month: '$month',
           },
           receiptsByMonth: {
             $sum: 1,
@@ -106,6 +115,7 @@ module.exports = (app) => {
 
   app.get('/api/data/receiptsByMonthAll', (req, res) => {
     const lastMonth = new Date();
+    lastMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     Receipts.aggregate([
       {
@@ -150,6 +160,8 @@ module.exports = (app) => {
     const lastMonth = new Date();
     const firstMonth = new Date();
 
+    lastMonth.setDate(1);
+    firstMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     firstMonth.setMonth(firstMonth.getMonth() - months);
     Receipts.aggregate([
@@ -191,6 +203,8 @@ module.exports = (app) => {
     const lastMonth = new Date();
     const firstMonth = new Date();
 
+    lastMonth.setDate(1);
+    firstMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     firstMonth.setMonth(firstMonth.getMonth() - months);
     Receipts.aggregate([
@@ -213,9 +227,13 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+            }
             // DateRange: title,
-            year: '$year',
-            month: '$month',
+            // year: '$year',
+            // month: '$month',
           },
           lateReceiptsByMonth: {
             $sum: 1,
@@ -234,7 +252,7 @@ module.exports = (app) => {
 
   app.get('/api/data/lateByMonthAll', (req, res) => {
     const lastMonth = new Date();
-
+    lastMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     Receipts.aggregate([
       {
@@ -280,6 +298,8 @@ module.exports = (app) => {
     const lastMonth = new Date();
     const firstMonth = new Date();
 
+    lastMonth.setDate(1);
+    firstMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     firstMonth.setMonth(firstMonth.getMonth() - months);
     Receipts.aggregate([
@@ -323,6 +343,7 @@ module.exports = (app) => {
 
   app.get('/api/data/qtyByMonthAll', (req, res) => {
     const lastMonth = new Date();
+    lastMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     Receipts.aggregate([
       {

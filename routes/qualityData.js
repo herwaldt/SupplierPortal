@@ -9,6 +9,8 @@ module.exports = (app) => {
     const lastMonth = new Date();
     const firstMonth = new Date();
 
+    lastMonth.setDate(1);
+    firstMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     firstMonth.setMonth(firstMonth.getMonth() - months);
     Quality.aggregate([
@@ -51,6 +53,8 @@ module.exports = (app) => {
     const lastMonth = new Date();
     const firstMonth = new Date();
 
+    lastMonth.setDate(1);
+    firstMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     firstMonth.setMonth(firstMonth.getMonth() - months);
     Quality.aggregate([
@@ -95,6 +99,7 @@ module.exports = (app) => {
 
   app.get('/api/data/qualityByMonthAll', (req, res) => {
     const lastMonth = new Date();
+    lastMonth.setDate(1);
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     Quality.aggregate([
       {

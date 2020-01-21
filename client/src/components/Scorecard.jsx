@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
+import BarChart from './ThemeComponents/BarChart';
 import OverviewCard from './ThemeComponents/OverviewCard';
 import TotalScore from './ThemeComponents/TotalScore';
-import { fetchOverview3month, fetchDelivery } from '../actions/index';
+import { fetchOverview3month, fetchLateByMonth, fetchReceiptsByMonth } from '../actions/index';
 
 const useStyles = makeStyles(() => ({
   gridColumn: {
@@ -30,7 +31,6 @@ const Scorecard = () => {
 
   const dispatch = useDispatch();
   const overview = useSelector((state) => state.overview);
-  console.log(overview);
   const range = '3Months';
 
 
@@ -45,6 +45,8 @@ const Scorecard = () => {
 
   useEffect(() => {
     dispatch(fetchOverview3month());
+    dispatch(fetchLateByMonth());
+    dispatch(fetchReceiptsByMonth());
   }, []);
 
   let deliveryCalc = '...loading';
@@ -56,6 +58,21 @@ const Scorecard = () => {
     defectiveCalc = Math.round(( qtyDefective / qtyTransacted ) * 1000000)
   };
 
+  //  BELOW IS BARCHART INFO
+  // const receipt = useSelector((state) => state.receipt);
+  // let dateRange = 3;
+  // let currentDate = new Date();
+  // currentDate.setDate(1);
+
+  // if (receipt) {
+  //   for (let i=0; i<dateRange; i++) {
+  //     currentDate.setMonth(currentDate.getMonth()-1);
+  //     const received = receipt.currentDate;
+  //   };
+  // }
+  // currentDate.setMonth(currentDate.getMonth()-1);
+  //  ABOVE IS BARCHART INFO
+
   return (
     <>
       <Grid container className={classes.gridColumn}>
@@ -66,6 +83,7 @@ const Scorecard = () => {
             <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc}/>
             <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506"/>
           </Grid>
+          <BarChart />
         </Grid>
       </Grid>
     </>

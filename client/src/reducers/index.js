@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import overviewReducer from './overviewReducer';
-import deliveryReducer from './deliveryReducer';
+import receiptsReducer from './receiptsReducer';
+import lateReducer from './lateReducer';
 
 export default combineReducers({
   overview: overviewReducer,
-  delivery: deliveryReducer,
+  receipt: receiptsReducer,
+  late: lateReducer,
 });

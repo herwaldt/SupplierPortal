@@ -1,8 +1,8 @@
-import { FETCH_DELIVERY } from '../actions/types';
+import { FETCH_RECEIPTS } from '../actions/types';
 
 export default function (state = null, action) {
   switch (action.type) {
-    case FETCH_DELIVERY:
+    case FETCH_RECEIPTS:
       return action.payload;
     default:
       return state;
