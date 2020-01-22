@@ -5,7 +5,12 @@ const keys = require('./config/keys');
 require('./models/Receipts');
 require('./models/Quality');
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true }, { useUnifiedTopology: true });
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}
+
+mongoose.connect(keys.mongoURI, options);
 
 const app = express();
 

@@ -103,12 +103,13 @@ export default function BarChart() {
             <Typography variant="h4" component="h2">
               On-Time Delivery (OTD)
             </Typography>
-            <Bar
-              data={data}
-              options={options}
-              height={300}
-              className={classes.barchart}
-            />
+            <div style={{ position: "relative", margin: "auto", width: "80vw", height: '30vh' }}>
+              <Bar
+                data={data}
+                options={options}
+                className={classes.barchart}
+              />
+            </div>
           </Grid>
         </Card>
       </Paper>

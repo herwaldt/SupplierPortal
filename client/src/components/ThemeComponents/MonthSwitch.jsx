@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Card, Paper, Grid } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+
+import { updateDateRange } from '../../actions/index';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -44,22 +47,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MonthSwitch() {
   const classes = useStyles();
-  const [dateRange, setDateRange] = React.useState('3Month');
+  const [dateRange, setDateRange] = React.useState('3Months');
+
+  const dispatch = useDispatch();
+  const theDateRange = useSelector((state) => state.dateRange);
+  console.log('the date range is',theDateRange);
+
+  useEffect(() => {
+    dispatch(updateDateRange(dateRange));
+  }, [dateRange]);
 
   const handleChange = (event, newDateRange) => {
-    if (newDateRange !== dateRange) {
+    if (newDateRange !== null) {
       setDateRange(newDateRange);
     }
   };
 
   const children = [
-    <ToggleButton key={1} value="3Month">
+    <ToggleButton key={1} value="3Months">
         Last 3 months
     </ToggleButton>,
-    <ToggleButton key={2} value="6Month">
+    <ToggleButton key={2} value="6Months">
         Last 6 Months
     </ToggleButton>,
-    <ToggleButton key={3} value="12Month">
+    <ToggleButton key={3} value="12Months">
         Last 12 Months
     </ToggleButton>,
   ];
