@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 
 import BarChart from './ThemeComponents/BarChart';
 import OverviewCard from './ThemeComponents/OverviewCard';
-import TotalScore from './ThemeComponents/TotalScore';
+import TotalOverviewScore from './ThemeComponents/TotalOverviewScore';
 import { fetchOverview3month, fetchLateByMonth, fetchReceiptsByMonth } from '../actions/index';
 
 const useStyles = makeStyles(() => ({
@@ -77,11 +77,11 @@ const Scorecard = () => {
     <>
       <Grid container className={classes.gridColumn}>
         <Grid container item className={classes.gridRow}>
-          <TotalScore />
+          <TotalOverviewScore />
           <Grid item container className={classes.gridRow}>
-            <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc}/>
-            <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc}/>
-            <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506"/>
+            <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc} link="/scorecard/OTD"/>
+            <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM"/>
+            <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV"/>
           </Grid>
           <BarChart />
         </Grid>

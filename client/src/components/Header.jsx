@@ -28,7 +28,7 @@ const Header = () => {
     <>
       <AppBar className={classes.AppBar}>
         <Toolbar>
-          <Link href="/">
+          <Link href="/scorecard">
             <Grid container className={classes.grid}>
               <img className={classes.imageProp} src={Logo} alt="xrite-logo" />
             </Grid>

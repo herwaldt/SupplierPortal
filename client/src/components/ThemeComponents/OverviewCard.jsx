@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
-  Typography, Button, CardContent, CardActions, Card, Paper, Grid,
+  Typography, Button, CardContent, CardActions, Card, Paper, Grid, Link,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function OverviewCard({ title, subtitle, desc, calc }) {
+export default function OverviewCard({ title, subtitle, desc, calc, link }) {
   const classes = useStyles();
 
   return (
@@ -65,7 +65,9 @@ export default function OverviewCard({ title, subtitle, desc, calc }) {
             </Grid>
           </CardContent>
           <CardActions>
+            <Link href={link}>
             <Button size="large" className={classes.button} variant="contained" color="primary">View Data</Button>
+            </Link>
           </CardActions>
         </Grid>
       </Card>
