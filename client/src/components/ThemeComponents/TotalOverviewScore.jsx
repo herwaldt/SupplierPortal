@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TotalScore() {
+export default function TotalOverviewScore() {
   const classes = useStyles();
 
   return (

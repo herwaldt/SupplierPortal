@@ -1,11 +1,15 @@
 import axios from 'axios';
-import { FETCH_OVERVIEW, FETCH_RECEIPTS, FETCH_LATE } from './types';
+import { FETCH_OVERVIEW, FETCH_RECEIPTS, FETCH_LATE, UPDATE_DATERANGE } from './types';
 
 // export const fetchReceipts = () => async (dispatch) => {
 //   const res = await axios.get('/api/data/receipt');
 
 //   dispatch({ type: FETCH_RECEIPTS, payload: res.data });
 // };
+
+export function updateDateRange(payload) {
+  return { type: UPDATE_DATERANGE, payload }
+};
 
 export const fetchOverview3month = () => async (dispatch) => {
 

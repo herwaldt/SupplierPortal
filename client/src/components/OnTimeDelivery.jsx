@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import BarChart from './ThemeComponents/BarChart';
-import TotalScore from './ThemeComponents/TotalScore';
+import MetricDetailScore from './ThemeComponents/MetricDetailScore';
 import { fetchLateByMonth, fetchReceiptsByMonth } from '../actions/index';
 
 const useStyles = makeStyles(() => ({
@@ -41,7 +41,7 @@ const Scorecard = () => {
     <>
       <Grid container className={classes.gridColumn}>
         <Grid container item className={classes.gridRow}>
-          <TotalScore />
+          <MetricDetailScore />
           <Grid item container className={classes.gridRow}>
             <BarChart />
           </Grid>
