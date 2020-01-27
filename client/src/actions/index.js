@@ -42,39 +42,41 @@ export const fetchLateByMonth = () => async (dispatch) => {
   dispatch({ type: FETCH_LATE, payload: res.data });
 };
 
-export const fetchReceiptsByMonth = () => async (dispatch) => {
-  const res = await axios.get('api/data/receiptsByMonth/12')
+// export const fetchReceiptsByMonth = () => async (dispatch) => {
+//   const res = await axios.get('api/data/receiptsByMonth/12')
 
-  dispatch({ type: FETCH_RECEIPTS, payload: res.data });
-};
+//   dispatch({ type: FETCH_RECEIPTS, payload: res.data });
+// };
 
 
 // BELOW WILL TAKE THE RECEIPTS BY MONTH AND WILL MAKE THE _ID = THE MONTH DATE
-// export const fetchReceiptsByMonth = () => async (dispatch) => {
+export const fetchReceiptsByMonth = () => async (dispatch) => {
 
-//   const res = await axios.all([
-//     axios.get('api/data/receiptsByMonth/12'),
-//   ]).then(axios.spread((...responses) => {
-//     console.log(...responses);
+  const res = await axios.all([
+    axios.get('api/data/receiptsByMonth/12'),
+  ]).then(axios.spread((...responses) => {
+    console.log(...responses);
 
-//     return responses.map((response) => {
-//     const resp = response.data;
-//     return resp.reduce((dataByMonth, response) => {
-//       const { _id, receiptsByMonth } = response;
-//       if (dataByMonth[_id]) {
-//           dataByMonth[_id] = { receiptsByMonth, ...dataByMonth[_id] };
-//       } else {
-//           dataByMonth[_id] = receiptsByMonth;
-//       }
-//       return dataByMonth;
-//     }, {});
-//   });
-//   }));
+    return responses.map((response) => {
+    const resp = response.data;
+    return resp.reduce((dataByMonth, response) => {
+      const { _id, receiptsByMonth } = response;
+      const id = new Date(_id);
+      console.log(id);
+      if (dataByMonth[id]) {
+          dataByMonth[id] = { receiptsByMonth, ...dataByMonth[id] };
+      } else {
+          dataByMonth[id] = receiptsByMonth;
+      }
+      return dataByMonth;
+    }, {});
+  });
+  }));
 
-//   console.log(res);
+  console.log(res);
 
-//   dispatch({ type: FETCH_RECEIPTS, payload: res });
-// };
+  dispatch({ type: FETCH_RECEIPTS, payload: res });
+};
 
 // BELOW WILL DATE BOTH (BY MONTH DATAS) AND REPLACE THE _ID WITH THE DATE
 // export const fetchDelivery = () => async (dispatch) => {

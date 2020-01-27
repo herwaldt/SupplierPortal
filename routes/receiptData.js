@@ -90,10 +90,11 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-          $dateFromParts: {
-            year: '$year',
-            month: '$month',
-          }
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+              timezone: "America/New_York",
+            }
             // DateRange: title,
             // year: '$year',
             // month: '$month',
