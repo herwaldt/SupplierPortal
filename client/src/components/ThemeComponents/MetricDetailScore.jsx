@@ -76,7 +76,7 @@ function MetricScore() {
 function MetricDetail({ total, badMetric }) {
   const classes = useStyles();
 
-  const calc = Math.round((( total - badMetric ) / total ) * 100) + '%';
+  const calc = total - badMetric ? Math.round((( total - badMetric ) / total ) * 100) + '%' : 0;
 
   return (
     <Card elevation={0} className={classes.cardRight}>

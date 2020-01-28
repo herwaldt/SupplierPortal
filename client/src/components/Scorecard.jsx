@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
-import BarChart from './ThemeComponents/BarChart';
 import OverviewCard from './ThemeComponents/OverviewCard';
 import TotalOverviewScore from './ThemeComponents/TotalOverviewScore';
 import { fetchOverview3month, fetchLateByMonth, fetchReceiptsByMonth } from '../actions/index';
@@ -31,7 +30,7 @@ const Scorecard = () => {
 
   const dispatch = useDispatch();
   const overview = useSelector((state) => state.overview);
-  const range = '3Months';
+  const dateRange = useSelector((state) => state.dateRange);
 
 
   // const state = {"3Months": {"qtyDefective": 0, "lateReceipts": 0, "qtyTransacted": 0, "receipts": 0}, "6Months": {"qtyDefective": 0, "lateReceipts": 0, "qtyTransacted": 0, "receipts": 0}, "12Months": {"qtyDefective": 0, "lateReceipts": 0, "qtyTransacted": 0, "receipts": 0}}
@@ -52,7 +51,7 @@ const Scorecard = () => {
   let deliveryCalc = '...loading';
   let defectiveCalc = '...loading';
   if (overview) {
-    const { qtyDefective, lateReceipts, qtyTransacted, receipts } = overview[range];
+    const { qtyDefective, lateReceipts, qtyTransacted, receipts } = overview[dateRange];
 
     deliveryCalc = Math.round((( receipts - lateReceipts ) / receipts ) * 100) + '%';
     defectiveCalc = Math.round(( qtyDefective / qtyTransacted ) * 1000000)
@@ -83,7 +82,6 @@ const Scorecard = () => {
               <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM"/>
               <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV"/>
             </Grid>
-          <BarChart />
         </Grid>
       </Grid>
     </>

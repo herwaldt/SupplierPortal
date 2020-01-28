@@ -49,6 +49,7 @@ export const fetchLateByMonth = () => async (dispatch) => {
     return resp.reduce((dataByMonth, response) => {
       const { _id, lateReceiptsByMonth } = response;
       const id = new Date(_id);
+      id.setHours(0,0,0,0);
       if (dataByMonth[id]) {
           dataByMonth[id] = { lateReceiptsByMonth, ...dataByMonth[id] };
       } else {
@@ -81,6 +82,7 @@ export const fetchReceiptsByMonth = () => async (dispatch) => {
     return resp.reduce((dataByMonth, response) => {
       const { _id, receiptsByMonth } = response;
       const id = new Date(_id);
+      id.setHours(0,0,0,0);
       if (dataByMonth[id]) {
           dataByMonth[id] = { receiptsByMonth, ...dataByMonth[id] };
       } else {

@@ -33,6 +33,7 @@ const Scorecard = () => {
   const receipt = useSelector((state) => state.receipts);
   const late = useSelector((state) => state.late);
   const overview = useSelector((state) => state.overview);
+  const dateRange = useSelector((state) => state.dateRange);
 
   useEffect(() => {
     dispatch(fetchLateByMonth());
@@ -40,12 +41,11 @@ const Scorecard = () => {
     dispatch(fetchOverview3month());
   }, []);
 
-  const range = '3Months';
   let lateReceipts = 0;
   let receipts = 0;
   if (overview) {
-    lateReceipts = overview[range]['lateReceipts'];
-    receipts = overview[range]['receipts'];
+    lateReceipts = overview[dateRange]['lateReceipts'];
+    receipts = overview[dateRange]['receipts'];
   };
 
   return (
