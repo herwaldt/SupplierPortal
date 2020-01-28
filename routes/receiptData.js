@@ -95,9 +95,6 @@ module.exports = (app) => {
               month: '$month',
               timezone: "America/New_York",
             }
-            // DateRange: title,
-            // year: '$year',
-            // month: '$month',
           },
           receiptsByMonth: {
             $sum: 1,
@@ -136,9 +133,11 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: 'FullHist',
-            year: '$year',
-            month: '$month',
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+              timezone: "America/New_York",
+            }
           },
           receiptsbyMonth: {
             $sum: 1,
@@ -231,6 +230,7 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
+              timezone: "America/New_York",
             }
             // DateRange: title,
             // year: '$year',
@@ -274,9 +274,11 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: 'FullHist',
-            year: '$year',
-            month: '$month',
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+              timezone: "America/New_York",
+            }
           },
           lateReceiptsByMonth: {
             $sum: 1,
@@ -323,9 +325,11 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: title,
-            year: '$year',
-            month: '$month',
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+              timezone: "America/New_York",
+            }
           },
           qtybyMonth: {
             $sum: '$qtyTransacted',
@@ -365,9 +369,11 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: 'FullHist',
-            year: '$year',
-            month: '$month',
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+              timezone: "America/New_York",
+            }
           },
           qtybyMonth: {
             $sum: '$qtyTransacted',

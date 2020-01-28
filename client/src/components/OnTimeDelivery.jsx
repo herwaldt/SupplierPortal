@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 
 import BarChart from './ThemeComponents/BarChart';
 import MetricDetailScore from './ThemeComponents/MetricDetailScore';
-import { fetchLateByMonth, fetchReceiptsByMonth } from '../actions/index';
+import { fetchLateByMonth, fetchReceiptsByMonth, fetchOverview3month } from '../actions/index';
 
 const useStyles = makeStyles(() => ({
   gridColumn: {
@@ -29,19 +29,30 @@ const Scorecard = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+
   const receipt = useSelector((state) => state.receipts);
-  console.log(receipt);
+  const late = useSelector((state) => state.late);
+  const overview = useSelector((state) => state.overview);
 
   useEffect(() => {
     dispatch(fetchLateByMonth());
     dispatch(fetchReceiptsByMonth());
+    dispatch(fetchOverview3month());
   }, []);
+
+  const range = '3Months';
+  let lateReceipts = 0;
+  let receipts = 0;
+  if (overview) {
+    lateReceipts = overview[range]['lateReceipts'];
+    receipts = overview[range]['receipts'];
+  };
 
   return (
     <>
       <Grid container className={classes.gridColumn}>
         <Grid container item className={classes.gridRow}>
-          <MetricDetailScore />
+          <MetricDetailScore total={receipts} badMetric={lateReceipts}/>
           <Grid item container className={classes.gridRow}>
             <BarChart />
           </Grid>

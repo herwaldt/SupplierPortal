@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 
 import BarChart from './ThemeComponents/BarChart';
 import OverviewCard from './ThemeComponents/OverviewCard';
@@ -78,11 +78,11 @@ const Scorecard = () => {
       <Grid container className={classes.gridColumn}>
         <Grid container item className={classes.gridRow}>
           <TotalOverviewScore />
-          <Grid item container className={classes.gridRow}>
-            <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc} link="/scorecard/OTD"/>
-            <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM"/>
-            <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV"/>
-          </Grid>
+            <Grid item container className={classes.gridRow}>
+              <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc} link="/scorecard/OTD"/>
+              <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM"/>
+              <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV"/>
+            </Grid>
           <BarChart />
         </Grid>
       </Grid>

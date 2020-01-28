@@ -78,9 +78,11 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: title,
-            year: '$year',
-            month: '$month',
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+              timezone: "America/New_York",
+            }
           },
           qtyDefectivebyMonth: {
             $sum: '$Qty_Defective',
@@ -121,9 +123,11 @@ module.exports = (app) => {
       {
         $group: {
           _id: {
-            DateRange: 'FullHist',
-            year: '$year',
-            month: '$month',
+            $dateFromParts: {
+              year: '$year',
+              month: '$month',
+              timezone: "America/New_York",
+            }
           },
           qtyDefectivebyMonth: {
             $sum: '$Qty_Defective',

@@ -2,39 +2,55 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/styles';
 import {
-  Card, Paper, Grid, Typography,
+  Paper, Grid,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: theme.spacing(1),
-  },
   paper: {
     minWidth: '80vw',
     margin: theme.spacing(1),
+    padding: theme.spacing(3),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justify: 'center',
   },
   grid: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  gridColumn: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justify: 'center',
-    minWidth: '80vw',
-    margin: 'auto',
-  },
   barchart: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  chartDiv: {
+    position: 'relative',
+    margin: 'auto',
+    width: '80vw',
+    height: '30vh',
+  },
 }));
+
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const lastMonth = new Date();
+lastMonth.setDate(1);
+
+let i = 3;
+let label = [];
+for (; i>0; i-- ) {
+  const thisMonth = new Date();
+  thisMonth.setMonth(lastMonth.getMonth() - i);
+
+  label.push(monthNames[thisMonth.getMonth()])
+};
+
+console.log(label);
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -98,20 +114,13 @@ export default function BarChart() {
   return (
     <Grid container direction="column" className={classes.grid}>
       <Paper elevation={2} className={classes.paper}>
-        <Card className={classes.card}>
-          <Grid className={classes.gridColumn}>
-            <Typography variant="h4" component="h2">
-              On-Time Delivery (OTD)
-            </Typography>
-            <div style={{ position: "relative", margin: "auto", width: "80vw", height: '30vh' }}>
-              <Bar
-                data={data}
-                options={options}
-                className={classes.barchart}
-              />
-            </div>
-          </Grid>
-        </Card>
+        <div className={classes.chartDiv}>
+          <Bar
+            data={data}
+            options={options}
+            className={classes.barchart}
+          />
+        </div>
       </Paper>
     </Grid>
   );

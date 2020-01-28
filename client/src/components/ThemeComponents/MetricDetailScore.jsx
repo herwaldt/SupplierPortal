@@ -73,25 +73,27 @@ function MetricScore() {
   );
 }
 
-function MetricDetail() {
+function MetricDetail({ total, badMetric }) {
   const classes = useStyles();
+
+  const calc = Math.round((( total - badMetric ) / total ) * 100) + '%';
 
   return (
     <Card elevation={0} className={classes.cardRight}>
       <Grid container direction="row" className={classes.grid}>
         <CardContent>
-          <Grid item direction="row" className={classes.grid}>
+          <Grid item className={classes.grid}>
             <Grid item container direction="column" className={classes.gridScore}>
                 <Typography variant="h1" className={classes.metric}>
-                  72%
+                  {calc}
                 </Typography>
             </Grid>
             <Grid item container direction="column" className={classes.gridReceipts}>
               <Typography variant="h4" component="h2">
-              Total Receipts: 758
+              Total Receipts: {total}
               </Typography>
               <Typography variant="h4" component="h2">
-              Late Receipts: 227 
+              Late Receipts: {badMetric} 
               </Typography>
             </Grid>
               <Button size="large" className={classes.button} variant="contained" color="primary">
@@ -104,14 +106,14 @@ function MetricDetail() {
   );
 }
 
-export default function MetricDetailScore() {
+export default function MetricDetailScore({ total, badMetric }) {
   const classes = useStyles();
 
   return (
     <Paper elevation={0} className={classes.paper}>
       <Grid container direction="row">
         <MetricScore />
-        <MetricDetail />
+        <MetricDetail total={total} badMetric={badMetric}/>
       </Grid>
     </Paper>
   );

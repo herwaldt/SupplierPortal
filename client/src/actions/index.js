@@ -14,17 +14,17 @@ export function updateDateRange(payload) {
 export const fetchOverview3month = () => async (dispatch) => {
 
   const res = await axios.all([
-    axios.get('api/data/receiptOverview/3'),
-    axios.get('api/data/lateReceiptOverview/3'),
-    axios.get('api/data/defectiveOverview/3'),
+    axios.get('/api/data/receiptOverview/3'),
+    axios.get('/api/data/lateReceiptOverview/3'),
+    axios.get('/api/data/defectiveOverview/3'),
 
-    axios.get('api/data/receiptOverview/6'),
-    axios.get('api/data/lateReceiptOverview/6'),
-    axios.get('api/data/defectiveOverview/6'),
+    axios.get('/api/data/receiptOverview/6'),
+    axios.get('/api/data/lateReceiptOverview/6'),
+    axios.get('/api/data/defectiveOverview/6'),
 
-    axios.get('api/data/receiptOverview/12'),
-    axios.get('api/data/lateReceiptOverview/12'),
-    axios.get('api/data/defectiveOverview/12'),
+    axios.get('/api/data/receiptOverview/12'),
+    axios.get('/api/data/lateReceiptOverview/12'),
+    axios.get('/api/data/defectiveOverview/12'),
   ]).then(axios.spread((...responses) => {
     return responses.reduce((dataByMonth, response) => {
       const { _id, ...data } = response.data;
@@ -36,14 +36,30 @@ export const fetchOverview3month = () => async (dispatch) => {
       return dataByMonth;
   }, {});
   }));
-
+  
   dispatch({ type: FETCH_OVERVIEW, payload: res });
 };
 
 export const fetchLateByMonth = () => async (dispatch) => {
-  const res = await axios.get('api/data/lateByMonth/12');
+  const res = await axios.all([
+    axios.get('/api/data/lateByMonth/12'),
+  ]).then(axios.spread((...responses) => {
+    return responses.map((response) => {
+    const resp = response.data;
+    return resp.reduce((dataByMonth, response) => {
+      const { _id, lateReceiptsByMonth } = response;
+      const id = new Date(_id);
+      if (dataByMonth[id]) {
+          dataByMonth[id] = { lateReceiptsByMonth, ...dataByMonth[id] };
+      } else {
+          dataByMonth[id] = lateReceiptsByMonth;
+      }
+      return dataByMonth;
+    }, {});
+  });
+  }));
 
-  dispatch({ type: FETCH_LATE, payload: res.data });
+  dispatch({ type: FETCH_LATE, payload: res[0] });
 };
 
 // export const fetchReceiptsByMonth = () => async (dispatch) => {
@@ -57,16 +73,14 @@ export const fetchLateByMonth = () => async (dispatch) => {
 export const fetchReceiptsByMonth = () => async (dispatch) => {
 
   const res = await axios.all([
-    axios.get('api/data/receiptsByMonth/12'),
+    axios.get('/api/data/receiptsByMonth/12'),
   ]).then(axios.spread((...responses) => {
-    console.log(...responses);
 
     return responses.map((response) => {
     const resp = response.data;
     return resp.reduce((dataByMonth, response) => {
       const { _id, receiptsByMonth } = response;
       const id = new Date(_id);
-      console.log(id);
       if (dataByMonth[id]) {
           dataByMonth[id] = { receiptsByMonth, ...dataByMonth[id] };
       } else {
@@ -77,9 +91,7 @@ export const fetchReceiptsByMonth = () => async (dispatch) => {
   });
   }));
 
-  console.log(res);
-
-  dispatch({ type: FETCH_RECEIPTS, payload: res });
+  dispatch({ type: FETCH_RECEIPTS, payload: res[0] });
 };
 
 // BELOW WILL DATE BOTH (BY MONTH DATAS) AND REPLACE THE _ID WITH THE DATE
