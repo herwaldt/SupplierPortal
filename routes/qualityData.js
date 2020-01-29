@@ -49,7 +49,6 @@ module.exports = (app) => {
 
   app.get('/api/data/qualityByMonth/:id', (req, res) => {
     const months = Number(req.params.id) + 1;
-    const title = `${req.params.id}Months`;
     const lastMonth = new Date();
     const firstMonth = new Date();
 
@@ -81,8 +80,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
+              timezone: 'America/New_York',
+            },
           },
           qtyDefectivebyMonth: {
             $sum: '$Qty_Defective',
@@ -126,8 +125,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
+              timezone: 'America/New_York',
+            },
           },
           qtyDefectivebyMonth: {
             $sum: '$Qty_Defective',
@@ -143,5 +142,4 @@ module.exports = (app) => {
         res.status(500).json({ error: err });
       });
   });
-
 };

@@ -26,7 +26,7 @@ const Header = () => {
   const classes = useStyles();
   return (
     <>
-      <AppBar className={classes.AppBar}>
+      <AppBar className={classes.AppBar} elevation={0}>
         <Toolbar>
           <Link href="/scorecard">
             <Grid container className={classes.grid}>

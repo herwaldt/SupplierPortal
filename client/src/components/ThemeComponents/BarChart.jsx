@@ -39,11 +39,12 @@ const monthNames = [
   "July", "August", "September", "October", "November", "December"
 ];
 
-export default function BarChart() {
+export default function BarChart({ dataLabel, metric }) {
   const classes = useStyles();
 
   const dateRange = useSelector((state) => state.dateRange);
   const onTime = useSelector((state) => state.onTime);
+  const quality = useSelector((state) => state.quality);
 
   const lastMonth = new Date();
   lastMonth.setDate(1);
@@ -77,31 +78,57 @@ export default function BarChart() {
     label.push(monthNames[thisMonth.getMonth()]);
   };
 
-  let onTimeData = [];
-  if (onTime) {
-    for (; j>0; j-- ) {
-      const thisMonth = new Date();
-      thisMonth.setDate(1);
-      thisMonth.setHours(0,0,0,0);
-      thisMonth.setMonth(lastMonth.getMonth() - j);
-      const match = onTime.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent;
-      onTimeData.push(
-        onTime.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent,
-      );
-    };
-  };
+  let monthlyData = [];
+  let chartDetail = {};
+  switch(metric) {
+    case 'onTimeMetric':
+      chartDetail = {
+        min: 0,
+        max: 100,
+        stepSize: 20,
+      };
+      if (onTime) {
+        for (; j>0; j-- ) {
+          const thisMonth = new Date();
+          thisMonth.setDate(1);
+          thisMonth.setHours(0,0,0,0);
+          thisMonth.setMonth(lastMonth.getMonth() - j);
+          monthlyData.push(
+            onTime.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent,
+          );
+        };
+      };
+      break;
+    case 'defectivePartMetric':
+      if (quality) {
+        for (; j>0; j-- ) {
+          const thisMonth = new Date();
+          thisMonth.setDate(1);
+          thisMonth.setHours(0,0,0,0);
+          thisMonth.setMonth(lastMonth.getMonth() - j);
+          monthlyData.push(
+            quality.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).DefectiveParts,
+          );
+        };
+      };
+      break;
+    default:
+      monthlyData = []
+  }
+
+
 
   const data = {
     labels: label,
     datasets: [
       {
-        label: 'OTD Percent',
+        label: dataLabel,
         backgroundColor: 'rgb(232,140,0)',
         borderColor: 'rgb(232,140,0)',
         borderWidth: 2,
         hoverBackgroundColor: 'rgb(255,175,0)',
         hoverBorderColor: 'rgb(245,245,245)',
-        data: onTimeData,
+        data: monthlyData,
       },
     ],
   };
@@ -132,11 +159,7 @@ export default function BarChart() {
       yAxes: [
         {
           type: 'linear',
-          ticks: {
-            min: 0,
-            max: 100,
-            stepSize: 20,
-          },
+          ticks: chartDetail,
           display: true,
           position: 'left',
           labels: {

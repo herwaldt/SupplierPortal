@@ -8,7 +8,7 @@ require('./models/Quality');
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}
+};
 
 mongoose.connect(keys.mongoURI, options);
 

@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 
 import BarChart from './ThemeComponents/BarChart';
 import MetricDetailScore from './ThemeComponents/MetricDetailScore';
-import { fetchOnTime, fetchOverview } from '../actions/index';
+import { fetchQuality, fetchOverview } from '../actions/index';
 import BackButton from './ThemeComponents/BackButton';
 
 const useStyles = makeStyles(() => ({
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const OnTimeDelivery = () => {
+const DefectiveParts = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -35,17 +35,17 @@ const OnTimeDelivery = () => {
   const dateRange = useSelector((state) => state.dateRange);
 
   useEffect(() => {
-    dispatch(fetchOnTime());
+    dispatch(fetchQuality());
     dispatch(fetchOverview());
   }, []);
 
-  let lateReceipts = 0;
-  let receipts = 0;
+  let qtyTransacted = 0;
+  let qtyDefective = 0;
   let calcMetric = 0;
   if (overview) {
-    lateReceipts = overview[dateRange]['lateReceipts'];
-    receipts = overview[dateRange]['receipts'];
-    calcMetric = Math.round((( receipts - lateReceipts ) / receipts ) * 100) + '%'
+    qtyTransacted = overview[dateRange]['qtyTransacted'];
+    qtyDefective = overview[dateRange]['qtyDefective'];
+    calcMetric = Math.round((( qtyDefective ) / qtyTransacted ) * 1000000)
   };
 
   return (
@@ -55,15 +55,15 @@ const OnTimeDelivery = () => {
         <Grid container item className={classes.gridRow}>
           <MetricDetailScore
             calcMetric={calcMetric}
-            totalMetric={receipts}
-            badMetric={lateReceipts}
-            totalMetricLabel='Total Receipts: '
-            badMetricLabel='Late Receipts: '
-            letterGradeLabel='OTD Score'
-            metricTitle='On Time Delivery'
+            totalMetric={qtyTransacted}
+            badMetric={qtyDefective}
+            totalMetricLabel='Total Quantity: '
+            badMetricLabel='Defective Quantity: '
+            letterGradeLabel='DPPM Score'
+            metricTitle='Defective Parts Per Million'
           />
           <Grid item container className={classes.gridRow}>
-            <BarChart dataLabel='OTD Percent' metric='onTimeMetric' />
+            <BarChart dataLabel='Defective Parts Per Million' metric='defectivePartMetric' />
           </Grid>
         </Grid>
       </Grid>
@@ -71,4 +71,4 @@ const OnTimeDelivery = () => {
   );
 };
 
-export default OnTimeDelivery;
+export default DefectiveParts;

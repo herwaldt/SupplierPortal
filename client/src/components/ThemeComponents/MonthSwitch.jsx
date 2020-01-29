@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Card, Paper, Grid } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
@@ -50,7 +50,6 @@ export default function MonthSwitch() {
   const [dateRange, setDateRange] = React.useState('3Months');
 
   const dispatch = useDispatch();
-  const theDateRange = useSelector((state) => state.dateRange);
 
   useEffect(() => {
     dispatch(updateDateRange(dateRange));

@@ -23,6 +23,6 @@ module.exports = {
     'react',
   ],
   rules: {
-    'no-underscore-dangle': 'allow',
+    'no-underscore-dangle': 0,
   },
 };

@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MetricScore() {
+function MetricScore({ letterGradeLabel }) {
   const classes = useStyles();
 
   return (
@@ -60,7 +60,7 @@ function MetricScore() {
           <Grid item container spacing={2} className={classes.grid}>
             <Grid item container direction="column" className={classes.grid}>
               <Typography variant="h4" component="h2">
-              OTD Score:
+              {letterGradeLabel}
               </Typography>
             </Grid>
             <Typography variant="h1">
@@ -73,10 +73,8 @@ function MetricScore() {
   );
 }
 
-function MetricDetail({ total, badMetric }) {
+function MetricDetail({ calcMetric, totalMetric, badMetric, totalMetricLabel, badMetricLabel }) {
   const classes = useStyles();
-
-  const calc = total - badMetric ? Math.round((( total - badMetric ) / total ) * 100) + '%' : 0;
 
   return (
     <Card elevation={0} className={classes.cardRight}>
@@ -84,20 +82,20 @@ function MetricDetail({ total, badMetric }) {
         <CardContent>
           <Grid item className={classes.grid}>
             <Grid item container direction="column" className={classes.gridScore}>
-                <Typography variant="h1" className={classes.metric}>
-                  {calc}
+                <Typography variant="h2" className={classes.metric}>
+                  {calcMetric}
                 </Typography>
             </Grid>
             <Grid item container direction="column" className={classes.gridReceipts}>
-              <Typography variant="h4" component="h2">
-              Total Receipts: {total}
+              <Typography variant="h5">
+              {totalMetricLabel} {totalMetric}
               </Typography>
-              <Typography variant="h4" component="h2">
-              Late Receipts: {badMetric} 
+              <Typography variant="h5">
+              {badMetricLabel} {badMetric} 
               </Typography>
             </Grid>
               <Button size="large" className={classes.button} variant="contained" color="primary">
-                Export Data
+                Export
               </Button>
           </Grid>
         </CardContent>
@@ -106,14 +104,25 @@ function MetricDetail({ total, badMetric }) {
   );
 }
 
-export default function MetricDetailScore({ total, badMetric }) {
+export default function MetricDetailScore({ metricTitle, calcMetric, totalMetric, badMetric, totalMetricLabel, badMetricLabel, letterGradeLabel }) {
   const classes = useStyles();
 
   return (
     <Paper elevation={0} className={classes.paper}>
-      <Grid container direction="row">
-        <MetricScore />
-        <MetricDetail total={total} badMetric={badMetric}/>
+      <Grid container direction="column" className={classes.grid}>
+        <Typography variant="h2" className={classes.metric}>
+          {metricTitle}
+        </Typography>
+        <Grid container direction="row">
+          <MetricScore letterGradeLabel={letterGradeLabel} />
+          <MetricDetail
+            calcMetric={calcMetric}
+            totalMetric={totalMetric}
+            badMetric={badMetric}
+            totalMetricLabel={totalMetricLabel}
+            badMetricLabel={badMetricLabel}
+          />
+        </Grid>
       </Grid>
     </Paper>
   );

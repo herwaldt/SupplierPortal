@@ -32,55 +32,37 @@ const Scorecard = () => {
   const overview = useSelector((state) => state.overview);
   const dateRange = useSelector((state) => state.dateRange);
 
-
-  // const state = {"3Months": {"qtyDefective": 0, "lateReceipts": 0, "qtyTransacted": 0, "receipts": 0}, "6Months": {"qtyDefective": 0, "lateReceipts": 0, "qtyTransacted": 0, "receipts": 0}, "12Months": {"qtyDefective": 0, "lateReceipts": 0, "qtyTransacted": 0, "receipts": 0}}
-
-  // const {
-  //   qtyDefective,
-  //   lateReceipts,
-  //   qtyTransacted,
-  //   receipts,
-  // } = useSelector((state) => state[overview][range]);
-
   useEffect(() => {
     dispatch(fetchOverview());
     dispatch(fetchOnTime());
   }, []);
 
-  let deliveryCalc = '...loading';
-  let defectiveCalc = '...loading';
+  let deliveryCalc = 0;
+  let defectiveCalc = 0;
   if (overview) {
-    const { qtyDefective, lateReceipts, qtyTransacted, receipts } = overview[dateRange];
+    const {
+      qtyDefective, lateReceipts, qtyTransacted, receipts,
+    } = overview[dateRange];
 
-    deliveryCalc = Math.round((( receipts - lateReceipts ) / receipts ) * 100) + '%';
-    defectiveCalc = Math.round(( qtyDefective / qtyTransacted ) * 1000000)
-  };
-
-  //  BELOW IS BARCHART INFO
-  // const receipt = useSelector((state) => state.receipt);
-  // let dateRange = 3;
-  // let currentDate = new Date();
-  // currentDate.setDate(1);
-
-  // if (receipt) {
-  //   for (let i=0; i<dateRange; i++) {
-  //     currentDate.setMonth(currentDate.getMonth()-1);
-  //     const received = receipt.currentDate;
-  //   };
-  // }
-  // currentDate.setMonth(currentDate.getMonth()-1);
-  //  ABOVE IS BARCHART INFO
+    deliveryCalc = (
+      <span>
+        {Math.round(((receipts - lateReceipts) / receipts) * 100)}
+        %
+      </span>
+    );
+    defectiveCalc = Math.round((qtyDefective / qtyTransacted) * 1000000);
+  }
 
   return (
     <>
       <Grid container className={classes.gridColumn}>
         <Grid container item className={classes.gridRow}>
           <TotalOverviewScore />
-            <Grid item container className={classes.gridRow}>
-              <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc} link="/scorecard/OTD"/>
-              <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM"/>
-              <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV"/>
-            </Grid>
+          <Grid item container direction="row" className={classes.gridRow}>
+            <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc} link="/scorecard/OTD" />
+            <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM"/>
+            <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV" />
+          </Grid>
         </Grid>
       </Grid>
     </>

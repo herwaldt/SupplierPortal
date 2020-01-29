@@ -62,7 +62,6 @@ module.exports = (app) => {
 
   app.get('/api/data/receiptsByMonth/:id', (req, res) => {
     const months = Number(req.params.id) + 1;
-    const title = `${req.params.id}Months`;
     const lastMonth = new Date();
     const firstMonth = new Date();
 
@@ -93,8 +92,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
+              timezone: 'America/New_York',
+            },
           },
           receiptsByMonth: {
             $sum: 1,
@@ -136,8 +135,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
+              timezone: 'America/New_York',
+            },
           },
           receiptsbyMonth: {
             $sum: 1,
@@ -199,7 +198,6 @@ module.exports = (app) => {
 
   app.get('/api/data/lateByMonth/:id', (req, res) => {
     const months = Number(req.params.id) + 1;
-    const title = `${req.params.id}Months`;
     const lastMonth = new Date();
     const firstMonth = new Date();
 
@@ -230,11 +228,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
-            // DateRange: title,
-            // year: '$year',
-            // month: '$month',
+              timezone: 'America/New_York',
+            },
           },
           lateReceiptsByMonth: {
             $sum: 1,
@@ -277,8 +272,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
+              timezone: 'America/New_York',
+            },
           },
           lateReceiptsByMonth: {
             $sum: 1,
@@ -297,7 +292,6 @@ module.exports = (app) => {
 
   app.get('/api/data/qtyByMonth/:id', (req, res) => {
     const months = Number(req.params.id) + 1;
-    const title = `${req.params.id}Months`;
     const lastMonth = new Date();
     const firstMonth = new Date();
 
@@ -328,8 +322,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
+              timezone: 'America/New_York',
+            },
           },
           qtybyMonth: {
             $sum: '$qtyTransacted',
@@ -372,8 +366,8 @@ module.exports = (app) => {
             $dateFromParts: {
               year: '$year',
               month: '$month',
-              timezone: "America/New_York",
-            }
+              timezone: 'America/New_York',
+            },
           },
           qtybyMonth: {
             $sum: '$qtyTransacted',
