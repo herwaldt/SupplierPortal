@@ -43,23 +43,29 @@ export default function BarChart() {
   const classes = useStyles();
 
   const dateRange = useSelector((state) => state.dateRange);
+  const onTime = useSelector((state) => state.onTime);
 
   const lastMonth = new Date();
   lastMonth.setDate(1);
 
   let i;
+  let j;
   switch(dateRange) {
     case '3Months':
       i = 3;
+      j = 3;
       break;
     case '6Months':
       i = 6;
+      j = 6;
       break;
     case '12Months':
       i = 12;
+      j = 12;
       break;
     default:
       i = 3;
+      j = 0;
   }
 
   let label = [];
@@ -68,11 +74,22 @@ export default function BarChart() {
     thisMonth.setDate(1);
     thisMonth.setHours(0,0,0,0);
     thisMonth.setMonth(lastMonth.getMonth() - i);
-    // console.log(thisMonth);
-    label.push(monthNames[thisMonth.getMonth()])
+    label.push(monthNames[thisMonth.getMonth()]);
   };
 
-  console.log(label);
+  let onTimeData = [];
+  if (onTime) {
+    for (; j>0; j-- ) {
+      const thisMonth = new Date();
+      thisMonth.setDate(1);
+      thisMonth.setHours(0,0,0,0);
+      thisMonth.setMonth(lastMonth.getMonth() - j);
+      const match = onTime.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent;
+      onTimeData.push(
+        onTime.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent,
+      );
+    };
+  };
 
   const data = {
     labels: label,
@@ -84,7 +101,7 @@ export default function BarChart() {
         borderWidth: 2,
         hoverBackgroundColor: 'rgb(255,175,0)',
         hoverBorderColor: 'rgb(245,245,245)',
-        data: [65, 59, 80, 81, 56, 65, 59, 80, 81, 56, 55, 40],
+        data: onTimeData,
       },
     ],
   };

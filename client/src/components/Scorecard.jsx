@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 
 import OverviewCard from './ThemeComponents/OverviewCard';
 import TotalOverviewScore from './ThemeComponents/TotalOverviewScore';
-import { fetchOverview3month, fetchLateByMonth, fetchReceiptsByMonth } from '../actions/index';
+import { fetchOverview, fetchOnTime } from '../actions/index';
 
 const useStyles = makeStyles(() => ({
   gridColumn: {
@@ -43,9 +43,8 @@ const Scorecard = () => {
   // } = useSelector((state) => state[overview][range]);
 
   useEffect(() => {
-    dispatch(fetchOverview3month());
-    dispatch(fetchLateByMonth());
-    dispatch(fetchReceiptsByMonth());
+    dispatch(fetchOverview());
+    dispatch(fetchOnTime());
   }, []);
 
   let deliveryCalc = '...loading';

@@ -51,7 +51,6 @@ export default function MonthSwitch() {
 
   const dispatch = useDispatch();
   const theDateRange = useSelector((state) => state.dateRange);
-  console.log('the date range is',theDateRange);
 
   useEffect(() => {
     dispatch(updateDateRange(dateRange));
