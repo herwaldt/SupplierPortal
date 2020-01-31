@@ -41,12 +41,12 @@ const OnTimeDelivery = () => {
 
   let lateReceipts = 0;
   let receipts = 0;
-  let calcMetric = 0;
+  let calcMetric = '0%';
   if (overview) {
-    lateReceipts = overview[dateRange]['lateReceipts'];
-    receipts = overview[dateRange]['receipts'];
-    calcMetric = Math.round((( receipts - lateReceipts ) / receipts ) * 100) + '%'
-  };
+    lateReceipts = overview[dateRange].lateReceipts;
+    receipts = overview[dateRange].receipts;
+    calcMetric = `${Math.round(((receipts - lateReceipts) / receipts) * 100)}%` || '0%';
+  }
 
   return (
     <>
@@ -57,13 +57,13 @@ const OnTimeDelivery = () => {
             calcMetric={calcMetric}
             totalMetric={receipts}
             badMetric={lateReceipts}
-            totalMetricLabel='Total Receipts: '
-            badMetricLabel='Late Receipts: '
-            letterGradeLabel='OTD Score'
-            metricTitle='On Time Delivery'
+            totalMetricLabel="Total Receipts: "
+            badMetricLabel="Late Receipts: "
+            letterGradeLabel="OTD Score"
+            metricTitle="On Time Delivery"
           />
           <Grid item container className={classes.gridRow}>
-            <BarChart dataLabel='OTD Percent' metric='onTimeMetric' />
+            <BarChart dataLabel="OTD Percent" metric="onTimeMetric" />
           </Grid>
         </Grid>
       </Grid>

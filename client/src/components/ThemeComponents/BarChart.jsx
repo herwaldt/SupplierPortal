@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const monthNames = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
 export default function BarChart({ dataLabel, metric }) {
@@ -51,7 +51,7 @@ export default function BarChart({ dataLabel, metric }) {
 
   let i;
   let j;
-  switch(dateRange) {
+  switch (dateRange) {
     case '3Months':
       i = 3;
       j = 3;
@@ -69,18 +69,18 @@ export default function BarChart({ dataLabel, metric }) {
       j = 0;
   }
 
-  let label = [];
+  const label = [];
   for (; i>0; i-- ) {
     const thisMonth = new Date();
     thisMonth.setDate(1);
     thisMonth.setHours(0,0,0,0);
     thisMonth.setMonth(lastMonth.getMonth() - i);
     label.push(monthNames[thisMonth.getMonth()]);
-  };
+  }
 
   let monthlyData = [];
   let chartDetail = {};
-  switch(metric) {
+  switch (metric) {
     case 'onTimeMetric':
       chartDetail = {
         min: 0,
@@ -91,10 +91,11 @@ export default function BarChart({ dataLabel, metric }) {
         for (; j>0; j-- ) {
           const thisMonth = new Date();
           thisMonth.setDate(1);
-          thisMonth.setHours(0,0,0,0);
+          thisMonth.setHours(0, 0, 0, 0);
           thisMonth.setMonth(lastMonth.getMonth() - j);
           monthlyData.push(
-            onTime.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent,
+            onTime.find((itmInner) => 
+              (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent,
           );
         };
       };
@@ -104,16 +105,17 @@ export default function BarChart({ dataLabel, metric }) {
         for (; j>0; j-- ) {
           const thisMonth = new Date();
           thisMonth.setDate(1);
-          thisMonth.setHours(0,0,0,0);
+          thisMonth.setHours(0, 0, 0, 0);
           thisMonth.setMonth(lastMonth.getMonth() - j);
           monthlyData.push(
-            quality.find((itmInner) => (itmInner._id).valueOf() === (thisMonth).valueOf()).DefectiveParts,
+            quality.find((itmInner) =>
+              (itmInner._id).valueOf() === (thisMonth).valueOf()).defectiveParts,
           );
         };
       };
       break;
     default:
-      monthlyData = []
+      monthlyData = [];
   }
 
 

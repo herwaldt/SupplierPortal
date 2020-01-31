@@ -3,70 +3,61 @@ import {
   FETCH_OVERVIEW, UPDATE_DATERANGE, FETCH_ONTIME, FETCH_QUALITY,
 } from './types';
 
-// export const fetchReceipts = () => async (dispatch) => {
-//   const res = await axios.get('/api/data/receipt');
-
-//   dispatch({ type: FETCH_RECEIPTS, payload: res.data });
-// };
+const DATA_ROOT = '/api/data';
 
 export function updateDateRange(payload) {
   return { type: UPDATE_DATERANGE, payload };
 }
 
 export const fetchOverview = () => async (dispatch) => {
-  const res = await axios.all([
-    axios.get('/api/data/receiptOverview/3'),
-    axios.get('/api/data/lateReceiptOverview/3'),
-    axios.get('/api/data/defectiveOverview/3'),
+  const overviewMonths = [3, 6, 12];
+  const overviewEndpoints = ['receiptOverview', 'lateReceiptOverview', 'defectiveOverview'];
+  const overviewRequests = overviewMonths.reduce((requests, month) => {
+    const monthRequests = overviewEndpoints.map((endpoint) => axios.get(`${DATA_ROOT}/${endpoint}/${month}`));
+    requests.push(...monthRequests);
+    return requests;
+  }, []);
 
-    axios.get('/api/data/receiptOverview/6'),
-    axios.get('/api/data/lateReceiptOverview/6'),
-    axios.get('/api/data/defectiveOverview/6'),
-
-    axios.get('/api/data/receiptOverview/12'),
-    axios.get('/api/data/lateReceiptOverview/12'),
-    axios.get('/api/data/defectiveOverview/12'),
-  ]).then(axios.spread((...responses) => responses.reduce((dataByMonth, response) => {
-    const { _id, ...data } = response.data;
-    if (dataByMonth[_id]) {
-      dataByMonth[_id] = { ...data, ...dataByMonth[_id] };
-    } else {
-      dataByMonth[_id] = data;
-    }
-    return dataByMonth;
-  }, {})));
+  const res = await axios.all(overviewRequests)
+    .then(axios.spread((...responses) => responses.reduce((dataByMonth, response) => {
+      const { _id, ...data } = response.data;
+      if (dataByMonth[_id]) {
+        dataByMonth[_id] = { ...data, ...dataByMonth[_id] };
+      } else {
+        dataByMonth[_id] = data;
+      }
+      return dataByMonth;
+    }, {})));
 
   dispatch({ type: FETCH_OVERVIEW, payload: res });
 };
 
 export const fetchOnTime = () => async (dispatch) => {
-  const merged = [];
-  await axios.all([
-    axios.get('/api/data/receiptsByMonth/12'),
-    axios.get('/api/data/lateByMonth/12'),
+  // const merged = [];
+  const merged = await axios.all([
+    axios.get(`${DATA_ROOT}/receiptsByMonth/12`),
+    axios.get(`${DATA_ROOT}/lateByMonth/12`),
   ]).then(axios.spread((...responses) => {
     const receipts = responses[0].data;
     const lates = responses[1].data;
-    for (let i = 0; i < receipts.length; i++) {
-      merged.push({
-        ...receipts[i],
-        ...(lates.find((itmInner) => itmInner._id === receipts[i]._id)),
-      });
-    }
+
+    return receipts.map((receipt) => ({
+      ...receipt,
+      ...(lates.find((itmInner) => itmInner._id === receipt._id)),
+    }));
   }));
 
-  const final = [];
-  await merged.map((data) => {
+  const final = await merged.map((data) => {
     const { _id, receiptsByMonth, lateReceiptsByMonth } = data;
     const id = new Date(_id);
     id.setHours(0, 0, 0, 0);
     data._id = id;
     const OnTimePercent = Math.round((
       (receiptsByMonth - lateReceiptsByMonth) / receiptsByMonth) * 100) || 0;
-    return final.push({
+    return {
       ...data,
       OnTimePercent,
-    });
+    };
   });
 
   dispatch({ type: FETCH_ONTIME, payload: final });
@@ -75,8 +66,8 @@ export const fetchOnTime = () => async (dispatch) => {
 export const fetchQuality = () => async (dispatch) => {
   const merged = [];
   await axios.all([
-    axios.get('/api/data/qtyByMonth/12'),
-    axios.get('/api/data/qualityByMonth/12'),
+    axios.get(`${DATA_ROOT}/qtyByMonth/12`),
+    axios.get(`${DATA_ROOT}/qualityByMonth/12`),
   ]).then(axios.spread((...responses) => {
     const qtybyMonth = responses[0].data;
     const qtyDefectivebyMonth = responses[1].data;
@@ -94,10 +85,10 @@ export const fetchQuality = () => async (dispatch) => {
     const id = new Date(_id);
     id.setHours(0, 0, 0, 0);
     data._id = id;
-    const DefectiveParts = Math.round(((qtyDefectivebyMonth) / qtybyMonth) * 1000000) || 0;
+    const defectiveParts = Math.round(((qtyDefectivebyMonth) / qtybyMonth) * 1000000) || 0;
     return final.push({
       ...data,
-      DefectiveParts,
+      defectiveParts,
     });
   });
 

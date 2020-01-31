@@ -37,20 +37,15 @@ const Scorecard = () => {
     dispatch(fetchOnTime());
   }, []);
 
-  let deliveryCalc = 0;
+  let deliveryCalc = '0%';
   let defectiveCalc = 0;
   if (overview) {
     const {
       qtyDefective, lateReceipts, qtyTransacted, receipts,
     } = overview[dateRange];
 
-    deliveryCalc = (
-      <span>
-        {Math.round(((receipts - lateReceipts) / receipts) * 100)}
-        %
-      </span>
-    );
-    defectiveCalc = Math.round((qtyDefective / qtyTransacted) * 1000000);
+    deliveryCalc = (`${Math.round(((receipts - lateReceipts) / receipts) * 100)}%` || '0%');
+    defectiveCalc = Math.round((qtyDefective / qtyTransacted) * 1000000) || 0;
   }
 
   return (
@@ -60,7 +55,7 @@ const Scorecard = () => {
           <TotalOverviewScore />
           <Grid item container direction="row" className={classes.gridRow}>
             <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc} link="/scorecard/OTD" />
-            <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM"/>
+            <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM" />
             <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV" />
           </Grid>
         </Grid>

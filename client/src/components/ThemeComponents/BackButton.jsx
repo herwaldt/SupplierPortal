@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: theme.spacing(15),
     right: theme.spacing(10),
-  }
+  },
 }));
 
 export default function BackButton() {
@@ -16,7 +16,7 @@ export default function BackButton() {
 
   return (
     <Grid container className={classes.gridColumn}>
-      <Link href='/scorecard' style={{ textDecoration: 'none' }}>
+      <Link href="/scorecard" style={{ textDecoration: 'none' }}>
         <Fab elevation={0} color="primary" aria-label="back" className={classes.fab}>
           <ArrowBackRoundedIcon />
         </Fab>

@@ -43,10 +43,10 @@ const DefectiveParts = () => {
   let qtyDefective = 0;
   let calcMetric = 0;
   if (overview) {
-    qtyTransacted = overview[dateRange]['qtyTransacted'];
-    qtyDefective = overview[dateRange]['qtyDefective'];
-    calcMetric = Math.round((( qtyDefective ) / qtyTransacted ) * 1000000)
-  };
+    qtyTransacted = overview[dateRange].qtyTransacted;
+    qtyDefective = overview[dateRange].qtyDefective;
+    calcMetric = Math.round(((qtyDefective) / qtyTransacted) * 1000000);
+  }
 
   return (
     <>
@@ -57,13 +57,13 @@ const DefectiveParts = () => {
             calcMetric={calcMetric}
             totalMetric={qtyTransacted}
             badMetric={qtyDefective}
-            totalMetricLabel='Total Quantity: '
-            badMetricLabel='Defective Quantity: '
-            letterGradeLabel='DPPM Score'
-            metricTitle='Defective Parts Per Million'
+            totalMetricLabel="Total Quantity: "
+            badMetricLabel="Defective Quantity: "
+            letterGradeLabel="DPPM Score"
+            metricTitle="Defective Parts Per Million"
           />
           <Grid item container className={classes.gridRow}>
-            <BarChart dataLabel='Defective Parts Per Million' metric='defectivePartMetric' />
+            <BarChart dataLabel="Defective Parts Per Million" metric="defectivePartMetric" />
           </Grid>
         </Grid>
       </Grid>

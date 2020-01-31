@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
-  Typography, Button, CardContent, CardActions, Card,  Grid, Link,
+  Typography, Button, CardContent, CardActions, Card, Grid, Link,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    align: "center"
+    align: 'center',
   },
   metric: {
     paddingTop: theme.spacing(3),
@@ -41,10 +41,10 @@ export default function OverviewCard({ title, subtitle, desc, calc, link }) {
           <Grid item container className={classes.grid} spacing={2}>
             <Grid item container direction="column" className={classes.grid}>
               <Typography variant="h4" align="center">
-                  {title}
+                {title}
               </Typography>
               <Typography variant="h5" align="center">
-                  {subtitle}
+                {subtitle}
               </Typography>
             </Grid>
             <Grid item>
@@ -61,7 +61,9 @@ export default function OverviewCard({ title, subtitle, desc, calc, link }) {
         </CardContent>
         <CardActions>
           <Link href={link} style={{ textDecoration: 'none' }}>
-          <Button size="large" className={classes.button} variant="contained" color="primary">View Data</Button>
+            <Button size="large" className={classes.button} variant="contained" color="primary">
+              More Detail
+            </Button>
           </Link>
         </CardActions>
       </Grid>
