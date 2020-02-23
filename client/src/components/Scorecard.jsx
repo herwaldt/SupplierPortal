@@ -14,11 +14,12 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     justify: 'center',
     minHeight: '76vh',
-    minWidth: '100vh',
+    width: '98vw',
     margin: 'auto',
   },
   gridRow: {
     display: 'flex',
+    width: '98vw',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -37,15 +38,17 @@ const Scorecard = () => {
     dispatch(fetchOnTime());
   }, []);
 
+  let spendCalc = '$0';
   let deliveryCalc = '0%';
   let defectiveCalc = 0;
   if (overview) {
     const {
-      qtyDefective, lateReceipts, qtyTransacted, receipts,
+      qtyDefective, lateReceipts, qtyTransacted, receipts, spend,
     } = overview[dateRange];
 
     deliveryCalc = (`${Math.round(((receipts - lateReceipts) / receipts) * 100)}%` || '0%');
     defectiveCalc = Math.round((qtyDefective / qtyTransacted) * 1000000) || 0;
+    spendCalc = `$${Math.round(spend)}` || '$0';
   }
 
   return (
@@ -56,7 +59,7 @@ const Scorecard = () => {
           <Grid item container direction="row" className={classes.gridRow}>
             <OverviewCard title="On Time Delivery" subtitle="(OTD)" desc="This is a measure of late deliveries" calc={deliveryCalc} link="/scorecard/OTD" />
             <OverviewCard title="Defective Parts Per Million" subtitle="(DPPM)" desc="This is a measure of defective parts" calc={defectiveCalc} link="/scorecard/DPPM" />
-            <OverviewCard title="Purchase Price Variance" subtitle="(PPV)" desc="This is a measure of pricing fluctuation" calc="$1506" link="/scorecard/PPV" />
+            <OverviewCard title="Total Supplier Spend" subtitle="(TSS)" desc="This is a measure of total spend." calc={spendCalc} link="/scorecard/TSS" />
           </Grid>
         </Grid>
       </Grid>

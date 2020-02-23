@@ -9,6 +9,7 @@ import ForgotPassword from './LoginComponents/ForgotPassword';
 import MonthSwitch from './ThemeComponents/MonthSwitch';
 import OnTimeDelivery from './OnTimeDelivery';
 import DefectiveParts from './DefectiveParts';
+import SupplierSpend from './SupplierSpend';
 
 const Spend = () => <h2>Spend</h2>;
 
@@ -22,7 +23,7 @@ const App = () => (
         <Route exact path="/scorecard" component={Scorecard} />
         <Route exact path="/scorecard/OTD" component={OnTimeDelivery} />
         <Route exact path="/scorecard/DPPM" component={DefectiveParts} />
-        <Route exact path="/scorecard/spend" component={Spend} />
+        <Route exact path="/scorecard/TSS" component={SupplierSpend} />
         <Route exact path="/account/signup" component={SignUp} />
         <Route exact path="/account/password" component={ForgotPassword} />
       </div>

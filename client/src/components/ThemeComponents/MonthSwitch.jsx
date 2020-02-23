@@ -8,18 +8,23 @@ import { updateDateRange } from '../../actions/index';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    minWidth: 200,
+    width: '60vw',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      width: '80vw',
+    },
   },
   paper: {
-    minWidth: 200,
     width: '35vw',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
     margin: theme.spacing(2),
-    [theme.breakpoints.down('lg')]: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
       width: '80vw',
     },
   },
@@ -32,14 +37,14 @@ const useStyles = makeStyles((theme) => ({
     textSize: '12px',
   },
   buttonGroup: {
-    minWidth: 300,
+    minWidth: '20vw',
   },
   gridColumn: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justify: 'center',
-    minWidth: '100vh',
+    minWidth: '99vw',
     marginTop: theme.spacing(5),
     margin: 'auto',
   },

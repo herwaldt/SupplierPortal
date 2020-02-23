@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     justify: 'center',
     minHeight: '76vh',
-    minWidth: '100vh',
+    minWidth: '99vw',
     margin: 'auto',
   },
   gridRow: {
@@ -51,7 +51,7 @@ const OnTimeDelivery = () => {
   return (
     <>
       <BackButton />
-      <Grid container className={classes.gridColumn}>
+      <Grid className={classes.gridColumn}>
         <Grid container item className={classes.gridRow}>
           <MetricDetailScore
             calcMetric={calcMetric}

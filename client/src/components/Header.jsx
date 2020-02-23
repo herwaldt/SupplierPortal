@@ -1,25 +1,26 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
-  Link, Grid, AppBar, Toolbar,
+  Link, Grid, AppBar, Toolbar, Typography,
 } from '@material-ui/core';
 
-import Logo from '../images/xritelogo-white.png';
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   AppBar: {
     backgroundColor: 'rgb(232, 140, 0)',
-    height: 80,
+    height: 90,
+    zIndex: 1,
   },
-  imageProp: {
+  text: {
     height: '90%',
-    backgroundImage: `url(${Image})`,
+    color: theme.palette.secondary.main,
   },
   grid: {
     height: 100,
     alignItems: 'center',
+    align: 'center',
+    justify: 'center',
   },
-});
+}));
 
 
 const Header = () => {
@@ -30,7 +31,11 @@ const Header = () => {
         <Toolbar>
           <Link href="/scorecard">
             <Grid container className={classes.grid}>
-              <img className={classes.imageProp} src={Logo} alt="xrite-logo" />
+              <Grid item>
+                <Typography variant="h2" className={classes.text}>
+                  Supplier Portal
+                </Typography>
+              </Grid>
             </Grid>
           </Link>
         </Toolbar>

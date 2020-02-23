@@ -6,14 +6,12 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    minWidth: 200,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: theme.spacing(1),
   },
   paper: {
-    minWidth: 300,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
     margin: theme.spacing(5),

@@ -11,7 +11,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        X-Rite, Incorporated. All rights reserved.
+        Fake, Incorporated. All rights reserved.
       </Link>
       {' '}
       {new Date().getFullYear()}

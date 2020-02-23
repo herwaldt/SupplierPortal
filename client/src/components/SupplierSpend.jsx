@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 
 import BarChart from './ThemeComponents/BarChart';
 import MetricDetailScore from './ThemeComponents/MetricDetailScore';
-import { fetchQuality, fetchOverview } from '../actions/index';
+import { fetchSpend, fetchOverview } from '../actions/index';
 import BackButton from './ThemeComponents/BackButton';
 
 const useStyles = makeStyles(() => ({
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const DefectiveParts = () => {
+const SupplierSpend = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -35,17 +35,13 @@ const DefectiveParts = () => {
   const dateRange = useSelector((state) => state.dateRange);
 
   useEffect(() => {
-    dispatch(fetchQuality());
+    dispatch(fetchSpend());
     dispatch(fetchOverview());
   }, []);
 
-  let qtyTransacted = 0;
-  let qtyDefective = 0;
-  let calcMetric = 0;
+  let calcMetric = '$0';
   if (overview) {
-    qtyTransacted = overview[dateRange].qtyTransacted;
-    qtyDefective = overview[dateRange].qtyDefective;
-    calcMetric = Math.round(((qtyDefective) / qtyTransacted) * 1000000);
+    calcMetric = `$${Math.round(overview[dateRange].spend)}` || '$0';
   }
 
   return (
@@ -55,15 +51,11 @@ const DefectiveParts = () => {
         <Grid container item className={classes.gridRow}>
           <MetricDetailScore
             calcMetric={calcMetric}
-            totalMetric={qtyTransacted}
-            badMetric={qtyDefective}
-            totalMetricLabel="Total Quantity: "
-            badMetricLabel="Defective Quantity: "
-            letterGradeLabel="DPPM Score"
-            metricTitle="Defective Parts Per Million"
+            letterGradeLabel="Spend Score"
+            metricTitle="Total Supplier Spend"
           />
           <Grid item container className={classes.gridRow}>
-            <BarChart dataLabel="Defective Parts Per Million" metric="defectivePartMetric" />
+            <BarChart dataLabel="Dollars Spent" metric="spendMetric" />
           </Grid>
         </Grid>
       </Grid>
@@ -71,4 +63,4 @@ const DefectiveParts = () => {
   );
 };
 
-export default DefectiveParts;
+export default SupplierSpend;

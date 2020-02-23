@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  FETCH_OVERVIEW, UPDATE_DATERANGE, FETCH_ONTIME, FETCH_QUALITY,
+  FETCH_OVERVIEW, UPDATE_DATERANGE, FETCH_ONTIME, FETCH_QUALITY, FETCH_SPEND,
 } from './types';
 
 const DATA_ROOT = '/api/data';
@@ -33,7 +33,6 @@ export const fetchOverview = () => async (dispatch) => {
 };
 
 export const fetchOnTime = () => async (dispatch) => {
-  // const merged = [];
   const merged = await axios.all([
     axios.get(`${DATA_ROOT}/receiptsByMonth/12`),
     axios.get(`${DATA_ROOT}/lateByMonth/12`),
@@ -93,4 +92,21 @@ export const fetchQuality = () => async (dispatch) => {
   });
 
   dispatch({ type: FETCH_QUALITY, payload: final });
+};
+
+export const fetchSpend = () => async (dispatch) => {
+  const spendRaw = await axios.get(`${DATA_ROOT}/spendByMonth/12`);
+  const spendData = spendRaw.data;
+  const final = await spendData.map((data) => {
+    const { _id, spendByMonth } = data;
+    const id = new Date(_id);
+    id.setHours(0, 0, 0, 0);
+    data._id = id;
+    data.spendByMonth = spendByMonth.toFixed(2);
+    return {
+      ...data,
+    };
+  });
+
+  dispatch({ type: FETCH_SPEND, payload: final });
 };

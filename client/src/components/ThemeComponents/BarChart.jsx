@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/styles';
@@ -16,12 +17,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justify: 'center',
   },
-  grid: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  barchart: {
+  center: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -36,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const monthNames = [
   'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
+  'July', 'August', 'September', 'October', 'November', 'December',
 ];
 
 export default function BarChart({ dataLabel, metric }) {
@@ -45,6 +41,7 @@ export default function BarChart({ dataLabel, metric }) {
   const dateRange = useSelector((state) => state.dateRange);
   const onTime = useSelector((state) => state.onTime);
   const quality = useSelector((state) => state.quality);
+  const spend = useSelector((state) => state.spend);
 
   const lastMonth = new Date();
   lastMonth.setDate(1);
@@ -70,10 +67,10 @@ export default function BarChart({ dataLabel, metric }) {
   }
 
   const label = [];
-  for (; i>0; i-- ) {
+  for (; i > 0; i-- ) {
     const thisMonth = new Date();
     thisMonth.setDate(1);
-    thisMonth.setHours(0,0,0,0);
+    thisMonth.setHours(0, 0, 0, 0);
     thisMonth.setMonth(lastMonth.getMonth() - i);
     label.push(monthNames[thisMonth.getMonth()]);
   }
@@ -88,38 +85,53 @@ export default function BarChart({ dataLabel, metric }) {
         stepSize: 20,
       };
       if (onTime) {
-        for (; j>0; j-- ) {
+        for (; j > 0; j-- ) {
           const thisMonth = new Date();
           thisMonth.setDate(1);
           thisMonth.setHours(0, 0, 0, 0);
           thisMonth.setMonth(lastMonth.getMonth() - j);
+          const data = onTime.find((itmInner) =>
+            (itmInner._id).valueOf() === (thisMonth).valueOf());
           monthlyData.push(
-            onTime.find((itmInner) => 
-              (itmInner._id).valueOf() === (thisMonth).valueOf()).OnTimePercent,
+            data ? data.OnTimePercent : 0,
           );
-        };
-      };
+        }
+      }
       break;
     case 'defectivePartMetric':
       if (quality) {
-        for (; j>0; j-- ) {
+        for (; j > 0; j-- ) {
           const thisMonth = new Date();
           thisMonth.setDate(1);
           thisMonth.setHours(0, 0, 0, 0);
           thisMonth.setMonth(lastMonth.getMonth() - j);
+          const data = quality.find((itmInner) =>
+            (itmInner._id).valueOf() === (thisMonth).valueOf());
           monthlyData.push(
-            quality.find((itmInner) =>
-              (itmInner._id).valueOf() === (thisMonth).valueOf()).defectiveParts,
+            data ? data.defectiveParts : 0,
           );
-        };
-      };
+        }
+      }
+      break;
+    case 'spendMetric':
+      if (spend) {
+        for (; j > 0; j-- ) {
+          const thisMonth = new Date();
+          thisMonth.setDate(1);
+          thisMonth.setHours(0, 0, 0, 0);
+          thisMonth.setMonth(lastMonth.getMonth() - j);
+          const data = spend.find((itmInner) =>
+            (itmInner._id).valueOf() === (thisMonth).valueOf());
+          monthlyData.push(
+            data ? data.spendByMonth : 0,
+          );
+        }
+      }
       break;
     default:
       monthlyData = [];
   }
-
-
-
+console.log(spend);
   const data = {
     labels: label,
     datasets: [
@@ -173,16 +185,26 @@ export default function BarChart({ dataLabel, metric }) {
   };
 
   return (
-    <Grid container direction="column" className={classes.grid}>
+    <Grid container direction="column" className={classes.center}>
       <Paper elevation={2} className={classes.paper}>
         <div className={classes.chartDiv}>
           <Bar
             data={data}
             options={options}
-            className={classes.barchart}
+            className={classes.center}
           />
         </div>
       </Paper>
     </Grid>
   );
 }
+
+BarChart.defaultProps = {
+  dataLabel: null,
+  metric: null,
+};
+
+BarChart.propTypes = {
+  dataLabel: PropTypes.string,
+  metric: PropTypes.string,
+};

@@ -18,6 +18,9 @@ module.exports = (app) => {
               if (obj.qtyTransacted) {
                 obj.qtyTransacted = Number(obj.qtyTransacted);
               }
+              if (obj.unitPrice) {
+                obj.unitPrice = Number(obj.unitPrice);
+              }
               if (obj.transactionDate) {
                 obj.transactionDate = new Date(obj.transactionDate);
               }

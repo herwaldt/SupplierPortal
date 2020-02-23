@@ -97,49 +97,4 @@ module.exports = (app) => {
         res.status(500).json({ error: err });
       });
   });
-
-  app.get('/api/data/qualityByMonthAll', (req, res) => {
-    const lastMonth = new Date();
-    lastMonth.setDate(1);
-    lastMonth.setMonth(lastMonth.getMonth() - 1);
-    Quality.aggregate([
-      {
-        $match: {
-          RDM_Date: {
-            $lt: lastMonth,
-          },
-          Responsibility: 'Supplier',
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          month: { $month: '$RDM_Date' },
-          year: { $year: '$RDM_Date' },
-          Qty_Defective: '$Qty_Defective',
-        },
-      },
-      {
-        $group: {
-          _id: {
-            $dateFromParts: {
-              year: '$year',
-              month: '$month',
-              timezone: 'America/New_York',
-            },
-          },
-          qtyDefectivebyMonth: {
-            $sum: '$Qty_Defective',
-          },
-        },
-      },
-    ])
-      .exec()
-      .then((result) => {
-        res.json(result);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err });
-      });
-  });
 };

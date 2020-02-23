@@ -3,12 +3,11 @@ import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 
-import Image from '../images/xriteWebsiteBanner.jpg';
+import Image from '../images/WebsiteBanner.jpg';
 import SignIn from './LoginComponents/SignIn';
 
 const useStyles = makeStyles({
   backgroundImg: {
-
     overflow: 'hidden',
     height: '100%',
     display: 'flex',
