@@ -73,13 +73,15 @@ export default function OverviewCard({
       <Grid container direction="column" className={classes.grid}>
         <CardContent className={classes.cardContent}>
           <Grid item container direction="column" className={classes.grid}>
-            <Grid item container direction="column" className={classes.gridTitle}>
+            <Grid item container direction="row" className={classes.gridTitle}>
               <Typography variant="h4" align="center">
                 {title}
               </Typography>
-              <Typography variant="h5" align="center">
-                {subtitle}
-              </Typography>
+              <Grid item container direction="column">
+                <Typography variant="h5" align="center">
+                  {subtitle}
+                </Typography>
+              </Grid>
             </Grid>
             <Grid item>
               <Typography variant="body1" className={classes.grid}>
