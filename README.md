@@ -27,7 +27,7 @@ The app is split out into two sections:
 ### Node Modules
  
 ```bash
-cd server && npm i
+cd npm i
 ```
 and
 ```bash

@@ -1,16 +1,32 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/styles';
-import Box from '@material-ui/core/Box';
+import { Grid } from '@material-ui/core';
 
+
+import Image from '../images/WebsiteBanner.jpg';
+import SignIn from './LoginComponents/SignIn';
 
 const useStyles = makeStyles({
   backgroundImg: {
-    width: "auto",
-    overflow: "hidden",
-    height: "100%",
-    position: "relative",
+    overflow: 'hidden',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  card: {
+    minWidth: 500,
+    width: 500,
+    margin: 'auto',
+  },
+  grid: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minHeight: '93vh',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
 });
 
@@ -19,14 +35,12 @@ const Header = () => {
 
 
   const classes = useStyles();
+
   return (
     <>
-      <Box className={classes.backgroundImg}>
-        <img  src="landing-colormark.png" />
-      </Box>
-      <Paper className={classes.paperContainer}>
-        Some text to fill the Paper Component
-      </Paper>
+      <Grid className={classes.grid}>
+        <SignIn />
+      </Grid>
     </>
   );
 };

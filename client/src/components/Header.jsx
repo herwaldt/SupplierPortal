@@ -1,14 +1,27 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
+import {
+  Link, Grid, AppBar, Toolbar, Typography,
+} from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   AppBar: {
     backgroundColor: 'rgb(232, 140, 0)',
+    height: 90,
+    zIndex: 1,
   },
-});
+  text: {
+    height: '90%',
+    color: theme.palette.secondary.main,
+  },
+  grid: {
+    height: 100,
+    alignItems: 'center',
+    align: 'center',
+    justify: 'center',
+  },
+}));
+
 
 const Header = () => {
   const classes = useStyles();
