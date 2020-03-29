@@ -27,17 +27,9 @@ const Header = () => {
   const classes = useStyles();
   return (
     <>
-      <AppBar className={classes.AppBar} elevation={0}>
+      <AppBar className={classes.AppBar}>
         <Toolbar>
-          <Link href="/scorecard">
-            <Grid container className={classes.grid}>
-              <Grid item>
-                <Typography variant="h2" className={classes.text}>
-                  Supplier Portal
-                </Typography>
-              </Grid>
-            </Grid>
-          </Link>
+          <Typography variant="h5">X-Rite Supplier Portal</Typography>
         </Toolbar>
       </AppBar>
       <Toolbar />
