@@ -1,4 +1,7 @@
 # X-Rite Supplier Portal
+
+# See the deployed site here!
+## https://supplier-portal-scorecard.herokuapp.com/scorecard
  
 The X-Rite Supplier Portal is meant to show suppliers how they are preforming according to X-Rite's standards. A supplier can log in and see their grade for On-Time Delivery, Defective Parts-Per-Million, and Cost.
  
@@ -38,7 +41,7 @@ cd client && npm i
  
 Insert a folder 'config.js' in the server directory.
  
-Then create a 'keys.js' file with the information below.
+Then create a 'dev.js' file with the information below.
  
 ```javascript
 module.exports = {
