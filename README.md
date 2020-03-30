@@ -1,19 +1,16 @@
-# X-Rite Supplier Portal
+# Supplier Portal
 
 # See the deployed site here!
+ 
 ## https://supplier-portal-scorecard.herokuapp.com/scorecard
  
-The X-Rite Supplier Portal is meant to show suppliers how they are preforming according to X-Rite's standards. A supplier can log in and see their grade for On-Time Delivery, Defective Parts-Per-Million, and Cost.
- 
-A supplier creates their own account, and then can only see their companies results (once approved by an X-Rite Admin). 
- 
-The data is formed from Oracle outputs and X-Rite's internal RDM (Report of Discrepant Material) process. A supplier can also export data relating to their company for their own internal records.
+The Supplier Portal is meant to show overall suppliers performance. (Data is loaded through 2022)
  
 ---
  
 ## Code Style
  
-Express/Node.js Backend with a React Frontend
+Express/Node Backend, MongoDb, with a React Frontend. Deployed on Heroku
  
 ---
  
@@ -23,25 +20,26 @@ The app is split out into two sections:
 - `client`: Front-end of the app
 - `server`: Back-end of the app
  
+The `client` side is nested within the `server` end.
+ 
 ---
  
 ## Installation
  
-### Node Modules
+### Node Modules (also for client side)
  
 ```bash
 cd npm i
 ```
 and
 ```bash
-cd client && npm i
+cd client
+npm i
 ```
  
 ### API Keys
  
-Insert a folder 'config.js' in the server directory.
- 
-Then create a 'dev.js' file with the information below.
+Within the server/config create a 'dev.js' file with the information below. (You wil need access to the MongoDb)
  
 ```javascript
 module.exports = {
@@ -58,10 +56,4 @@ To run the server and client at the same time use (from the server directory):
 ```bash
 npm run dev
 ```
- 
----
- 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
- 
  
