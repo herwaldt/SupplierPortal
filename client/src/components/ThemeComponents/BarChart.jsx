@@ -131,7 +131,6 @@ export default function BarChart({ dataLabel, metric }) {
     default:
       monthlyData = [];
   }
-console.log(spend);
   const data = {
     labels: label,
     datasets: [
