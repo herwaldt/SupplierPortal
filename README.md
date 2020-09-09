@@ -6,6 +6,8 @@
  
 The Supplier Portal is meant to show overall suppliers performance. (Data is loaded through 2022)
  
+ ![alt text](https://github.com/herwaldt/SupplierPortal/tree/make_dynamic/assets/supplierOverview.png?raw=true)
+  ![alt text](https://github.com/herwaldt/SupplierPortal/tree/make_dynamic/assets/supplierDetails.png?raw=true)
 ---
  
 ## Code Style
